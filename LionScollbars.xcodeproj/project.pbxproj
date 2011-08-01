@@ -1,0 +1,322 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A53EDB3913E458D500274EC2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53EDB3813E458D500274EC2 /* Cocoa.framework */; };
+		A53EDB4313E458D500274EC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB4113E458D500274EC2 /* InfoPlist.strings */; };
+		A53EDB4513E458D500274EC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A53EDB4413E458D500274EC2 /* main.m */; };
+		A53EDB4913E458D500274EC2 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB4713E458D500274EC2 /* Credits.rtf */; };
+		A53EDB4C13E458D500274EC2 /* LionScollbarsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A53EDB4B13E458D500274EC2 /* LionScollbarsAppDelegate.m */; };
+		A53EDB4F13E458D500274EC2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB4D13E458D500274EC2 /* MainMenu.xib */; };
+		A53EDB5B13E50ACD00274EC2 /* ComboBoxCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A53EDB5A13E50ACD00274EC2 /* ComboBoxCellView.m */; };
+		A53EDB5D13E57A5C00274EC2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53EDB5C13E57A5C00274EC2 /* CoreFoundation.framework */; };
+		A53EDB6913E5997400274EC2 /* LionScrollbars.icns in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB6813E5997400274EC2 /* LionScrollbars.icns */; };
+		A53EDB6B13E59CB200274EC2 /* icon.psd in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB6A13E59CB200274EC2 /* icon.psd */; };
+		A56606A913E64563008C3FE1 /* DefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A56606A813E64563008C3FE1 /* DefaultsManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A53EDB3413E458D500274EC2 /* LionScollbars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LionScollbars.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A53EDB3813E458D500274EC2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A53EDB3B13E458D500274EC2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A53EDB3C13E458D500274EC2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A53EDB3D13E458D500274EC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A53EDB4013E458D500274EC2 /* LionScollbars-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LionScollbars-Info.plist"; sourceTree = "<group>"; };
+		A53EDB4213E458D500274EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A53EDB4413E458D500274EC2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A53EDB4613E458D500274EC2 /* LionScollbars-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LionScollbars-Prefix.pch"; sourceTree = "<group>"; };
+		A53EDB4813E458D500274EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A53EDB4A13E458D500274EC2 /* LionScollbarsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LionScollbarsAppDelegate.h; sourceTree = "<group>"; };
+		A53EDB4B13E458D500274EC2 /* LionScollbarsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LionScollbarsAppDelegate.m; sourceTree = "<group>"; };
+		A53EDB4E13E458D500274EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A53EDB5913E50ACD00274EC2 /* ComboBoxCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboBoxCellView.h; sourceTree = "<group>"; };
+		A53EDB5A13E50ACD00274EC2 /* ComboBoxCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboBoxCellView.m; sourceTree = "<group>"; };
+		A53EDB5C13E57A5C00274EC2 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		A53EDB6713E5995800274EC2 /* LionScollbars.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LionScollbars.entitlements; sourceTree = "<group>"; };
+		A53EDB6813E5997400274EC2 /* LionScrollbars.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = LionScrollbars.icns; sourceTree = "<group>"; };
+		A53EDB6A13E59CB200274EC2 /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
+		A56606A713E64563008C3FE1 /* DefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultsManager.h; sourceTree = "<group>"; };
+		A56606A813E64563008C3FE1 /* DefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultsManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A53EDB3113E458D500274EC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53EDB5D13E57A5C00274EC2 /* CoreFoundation.framework in Frameworks */,
+				A53EDB3913E458D500274EC2 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A53EDB2913E458D500274EC2 = {
+			isa = PBXGroup;
+			children = (
+				A53EDB6A13E59CB200274EC2 /* icon.psd */,
+				A53EDB6813E5997400274EC2 /* LionScrollbars.icns */,
+				A53EDB5C13E57A5C00274EC2 /* CoreFoundation.framework */,
+				A53EDB3E13E458D500274EC2 /* LionScollbars */,
+				A53EDB3713E458D500274EC2 /* Frameworks */,
+				A53EDB3513E458D500274EC2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A53EDB3513E458D500274EC2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A53EDB3413E458D500274EC2 /* LionScollbars.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A53EDB3713E458D500274EC2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A53EDB3813E458D500274EC2 /* Cocoa.framework */,
+				A53EDB3A13E458D500274EC2 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A53EDB3A13E458D500274EC2 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A53EDB3B13E458D500274EC2 /* AppKit.framework */,
+				A53EDB3C13E458D500274EC2 /* CoreData.framework */,
+				A53EDB3D13E458D500274EC2 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A53EDB3E13E458D500274EC2 /* LionScollbars */ = {
+			isa = PBXGroup;
+			children = (
+				A53EDB6713E5995800274EC2 /* LionScollbars.entitlements */,
+				A53EDB4A13E458D500274EC2 /* LionScollbarsAppDelegate.h */,
+				A56606A713E64563008C3FE1 /* DefaultsManager.h */,
+				A56606A813E64563008C3FE1 /* DefaultsManager.m */,
+				A53EDB4B13E458D500274EC2 /* LionScollbarsAppDelegate.m */,
+				A53EDB4D13E458D500274EC2 /* MainMenu.xib */,
+				A53EDB3F13E458D500274EC2 /* Supporting Files */,
+				A53EDB5913E50ACD00274EC2 /* ComboBoxCellView.h */,
+				A53EDB5A13E50ACD00274EC2 /* ComboBoxCellView.m */,
+			);
+			path = LionScollbars;
+			sourceTree = "<group>";
+		};
+		A53EDB3F13E458D500274EC2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A53EDB4013E458D500274EC2 /* LionScollbars-Info.plist */,
+				A53EDB4113E458D500274EC2 /* InfoPlist.strings */,
+				A53EDB4413E458D500274EC2 /* main.m */,
+				A53EDB4613E458D500274EC2 /* LionScollbars-Prefix.pch */,
+				A53EDB4713E458D500274EC2 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A53EDB3313E458D500274EC2 /* LionScollbars */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A53EDB5213E458D500274EC2 /* Build configuration list for PBXNativeTarget "LionScollbars" */;
+			buildPhases = (
+				A53EDB3013E458D500274EC2 /* Sources */,
+				A53EDB3113E458D500274EC2 /* Frameworks */,
+				A53EDB3213E458D500274EC2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LionScollbars;
+			productName = LionScollbars;
+			productReference = A53EDB3413E458D500274EC2 /* LionScollbars.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A53EDB2B13E458D500274EC2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Dain's place";
+			};
+			buildConfigurationList = A53EDB2E13E458D500274EC2 /* Build configuration list for PBXProject "LionScollbars" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A53EDB2913E458D500274EC2;
+			productRefGroup = A53EDB3513E458D500274EC2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A53EDB3313E458D500274EC2 /* LionScollbars */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A53EDB3213E458D500274EC2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53EDB4313E458D500274EC2 /* InfoPlist.strings in Resources */,
+				A53EDB4913E458D500274EC2 /* Credits.rtf in Resources */,
+				A53EDB4F13E458D500274EC2 /* MainMenu.xib in Resources */,
+				A53EDB6913E5997400274EC2 /* LionScrollbars.icns in Resources */,
+				A53EDB6B13E59CB200274EC2 /* icon.psd in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A53EDB3013E458D500274EC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A53EDB4513E458D500274EC2 /* main.m in Sources */,
+				A53EDB4C13E458D500274EC2 /* LionScollbarsAppDelegate.m in Sources */,
+				A53EDB5B13E50ACD00274EC2 /* ComboBoxCellView.m in Sources */,
+				A56606A913E64563008C3FE1 /* DefaultsManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A53EDB4113E458D500274EC2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A53EDB4213E458D500274EC2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A53EDB4713E458D500274EC2 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A53EDB4813E458D500274EC2 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A53EDB4D13E458D500274EC2 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A53EDB4E13E458D500274EC2 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A53EDB5013E458D500274EC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A53EDB5113E458D500274EC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A53EDB5313E458D500274EC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LionScollbars/LionScollbars-Prefix.pch";
+				INFOPLIST_FILE = "LionScollbars/LionScollbars-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A53EDB5413E458D500274EC2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LionScollbars/LionScollbars-Prefix.pch";
+				INFOPLIST_FILE = "LionScollbars/LionScollbars-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A53EDB2E13E458D500274EC2 /* Build configuration list for PBXProject "LionScollbars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A53EDB5013E458D500274EC2 /* Debug */,
+				A53EDB5113E458D500274EC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A53EDB5213E458D500274EC2 /* Build configuration list for PBXNativeTarget "LionScollbars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A53EDB5313E458D500274EC2 /* Debug */,
+				A53EDB5413E458D500274EC2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A53EDB2B13E458D500274EC2 /* Project object */;
+}
