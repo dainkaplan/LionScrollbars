@@ -2,7 +2,7 @@
 
 ## What does it do?
 
-LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed on OS X Lion (10.7). 
+LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed in OS X Lion (10.7). 
 
 ## Why do we need it?
 
@@ -11,6 +11,11 @@ The default behavior for scrollbars in Lion only allows for three settings in Sy
 ## How does it work?
 
 Application preferences are stored in `.plist`  files for each application. These preference files allow for overriding system defaults, so we write to these files for any  application for which you wish to override the system default. Unfortunately in OS X Lion a sandboxing mechanism was introduced, which drastically complicates where and how preferences are handled. 
+
+## Troubleshooting/Q & A
+
+1. **I tried it with App X but it isn't working...**: First, make sure you've __quit and restarted__ the application you want to change scrollbar settings for, as this is necessary for changes to take effect. If it still does not seem to be working, please report an issue (select from top navigation) with the name of the application.
+2. **I want to remove all my per-app settings...**: Just click the "reset all" button on the bottom right of the LionScrollbars application window; this will remove the setting from all applications that have it set.
 
 # Disclaimer/Licensing (BSD 3-clause license)
 
