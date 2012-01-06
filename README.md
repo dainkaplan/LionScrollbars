@@ -12,7 +12,7 @@ The default behavior for scrollbars in Lion only allows for three settings in Sy
 
 Application preferences are stored in `.plist`  files for each application. These preference files allow for overriding system defaults, so we write to these files for any  application for which you wish to override the system default. Unfortunately in OS X Lion a sandboxing mechanism was introduced, which drastically complicates where and how preferences are handled. 
 
-# Licensing (BSD 3-clause license)
+# Disclaimer/Licensing (BSD 3-clause license)
 
 	Copyright (c) 2011-2012, Dain Kaplan
 	All rights reserved.
