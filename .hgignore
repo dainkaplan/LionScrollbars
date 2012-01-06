@@ -1,2 +1,4 @@
 syntax: regexp
 ^.git
+syntax: glob
+LionScollbars/LionScollbars.app/Contents

@@ -1,16 +1,16 @@
 //
-//  ComboBoxCellView.m
+//  PopUpButtonCellView.m
 //  LionScollbars
 //
 //  Created by Dain Kaplan on 7/31/11.
-//  Copyright 2011 Dain's place. All rights reserved.
+//  Copyright 2011-2012 Dain Kaplan <dk@tempura.org>. All rights reserved.
 //
 
-#import "ComboBoxCellView.h"
+#import "PopUpButtonCellView.h"
 
-@implementation ComboBoxCellView
+@implementation PopUpButtonCellView
 
-@synthesize comboBox;
+@synthesize popUpButton;
 
 - (id)init
 {

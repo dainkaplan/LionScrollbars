@@ -3,12 +3,19 @@
 //  LionScollbars
 //
 //  Created by Dain Kaplan on 7/31/11.
-//  Copyright 2011 Dain's place. All rights reserved.
+//  Copyright 2011-2012 Dain Kaplan <dk@tempura.org>. All rights reserved.
 //
 
 #import "LionScollbarsAppDelegate.h"
-#import "ComboBoxCellView.h"
-#import "DefaultsManager.h"
+#import "PopUpButtonCellView.h"
+#import "ScrollbarsDefaultsManager.h"
+
+const NSInteger kSettingSystemDefault = -1;
+const NSInteger kSettingAutomatic = 0;
+const NSInteger kSettingWhenScrolling = 1;
+const NSInteger kSettingAlways = 2;
+
+#define VALIDATE_SYSTEM_SETTING(x) x = (x < kSettingAutomatic ? kSettingAutomatic : x)
 
 @interface AppInfo : NSObject {
 	NSImage *icon;
@@ -21,7 +28,6 @@
 @property (retain, readwrite) NSString *name;
 @property (retain, readwrite) NSString *identifier;
 @property (retain, readwrite) NSString *showScrollbarsSetting;
-
 
 @end
 
@@ -36,8 +42,8 @@
 
 @interface LionScollbarsAppDelegate()
 - (AppInfo *)appInfoForPackageFoundAtPath:(NSString *)fullPath;
-- (NSString *)displayStringFromSetting:(NSString *)setting;
-- (NSString *)settingFromDisplayString:(NSString *)display;
+- (NSInteger)tagFromSetting:(NSString *)setting;
+- (NSString *)settingFromTag:(NSInteger)tag;
 @end
 
 @implementation LionScollbarsAppDelegate
@@ -48,8 +54,9 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	self.applications = [NSMutableArray arrayWithCapacity:20];
-	NSString *defaultSettingDisplay = [self displayStringFromSetting:[[DefaultsManager sharedManager] settingValueForIdentifier:nil]];
-	[systemDefaultComboBox selectItemWithObjectValue:defaultSettingDisplay];
+	NSInteger defaultSettingTag = [self tagFromSetting:[[ScrollbarsDefaultsManager sharedManager] settingValueForIdentifier:nil]];
+	VALIDATE_SYSTEM_SETTING(defaultSettingTag);
+	[systemDefaultPopUpButton selectItemWithTag:defaultSettingTag];
 	
 	NSError *theError = nil;
 	NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Applications" error: &theError];
@@ -91,7 +98,6 @@
 	
 	NSInteger cnt = [self.applications count];
 	applicationCount.stringValue = [NSString stringWithFormat: @"%ld", cnt];
-	NSLog(@"Number of Applications: %ld", cnt);
 	[applicationsTableView reloadData];
 }
 
@@ -106,12 +112,11 @@
 	[alert addButtonWithTitle:@"Reset All"];
 	[alert addButtonWithTitle:@"Cancel"];
 	[alert setMessageText:[NSString stringWithFormat:@"Really reset all applications?"]];
-	//	[alert setInformativeText:@"This ope"];
 	[alert setAlertStyle:NSWarningAlertStyle];
 	NSInteger res = [alert runModal];
 	if (res == NSAlertFirstButtonReturn) {
 		for (AppInfo *info in self.applications) {
-			[[DefaultsManager sharedManager] setSettingValue:nil forIdentifier:info.identifier];
+			[[ScrollbarsDefaultsManager sharedManager] setSettingValue:nil forIdentifier:info.identifier];
 			info.showScrollbarsSetting = nil;
 		}
 	} else if (res == NSAlertSecondButtonReturn) {
@@ -132,67 +137,75 @@
 		info = [[AppInfo alloc] init];
 		info.name = displayName;
 		info.identifier = identifier;
-		info.showScrollbarsSetting = [[DefaultsManager sharedManager] settingValueForIdentifier:identifier];
+		info.showScrollbarsSetting = [[ScrollbarsDefaultsManager sharedManager] settingValueForIdentifier:identifier];
 		info.icon = icon;
-		NSLog(@"%@ (%@) = %@", info.name, info.identifier, info.showScrollbarsSetting);
+		NSLog(@"AppInfo: %@ (%@) = %@", info.name, info.identifier, info.showScrollbarsSetting);
 	}
 	return [info autorelease];
 }
 
 #pragma mark NSComboBoxDelegate methods
 
-
-- (void)comboBoxSelectionDidChange:(NSNotification *)notification
+//- (void)comboBoxSelectionDidChange:(NSNotification *)notification
+- (IBAction)popUpButtonValueChanged:(id)sender
 {
-	NSComboBox *comboBox = [notification object];
-	NSString *val = [comboBox objectValueOfSelectedItem];
-	val = [self settingFromDisplayString:val];
-	if ([notification object] == systemDefaultComboBox) {
-		[[DefaultsManager sharedManager] setSettingValue:val forIdentifier:nil];
+	NSPopUpButton *popup = sender; //[notification object];
+	NSInteger tag = [popup selectedTag];
+	NSInteger row = [applicationsTableView rowForView:popup];
+	NSString *val = [self settingFromTag:tag];
+	NSLog(@"Row is: %ld", row);
+	if (popup == systemDefaultPopUpButton) {
+		[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:nil];
 	} else {
-		tmpSettingValue = [val retain];
-	}
-}
-
-- (IBAction)rowClicked:(id)sender {
-	NSInteger row = [applicationsTableView rowForView:sender];
-	if (row > -1) {
-		AppInfo *info = [applications objectAtIndex:row];
-		NSLog(@"App Info: %@ (%@) = %@", info.name, info.identifier, tmpSettingValue);
-		[[DefaultsManager sharedManager] setSettingValue:tmpSettingValue forIdentifier:info.identifier];
-		[tmpSettingValue release];
+		if (row > -1) {
+			AppInfo *info = [applications objectAtIndex:row];
+			NSLog(@"App Info (new): %@ (%@) = %@", info.name, info.identifier, val);
+			[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:info.identifier];
+		}
 	}
 }
 
 #pragma mark settings control methods
 
-- (NSString *)displayStringFromSetting:(NSString *)setting
+- (NSInteger)tagFromSetting:(NSString *)setting
 {
-	NSString *ret = @"System Default";
-	if ([@"Automatic" isEqualToString:setting]) {
-		ret = @"Automatically";
-	} else	if ([@"Always" isEqualToString:setting]) {
-		ret = @"Always";
-	} else if ([@"WhenScrolling" isEqualToString:setting]) {
-		ret = @"When scrolling";
+	NSInteger ret = kSettingSystemDefault; // kAppleShowScrollBarsSettingDefault
+	if ([kAppleShowScrollBarsSettingAutomatic isEqualToString:setting]) {
+		ret = kSettingAutomatic;
+	} else if ([kAppleShowScrollBarsSettingWhenScrolling isEqualToString:setting]) {
+		ret = kSettingWhenScrolling;
+	} else if ([kAppleShowScrollBarsSettingAlways isEqualToString:setting]) {
+		ret = kSettingAlways;
 	}
 	return ret;
 }
 
-- (NSString *)settingFromDisplayString:(NSString *)display 
+- (NSString *)settingFromTag:(NSInteger)tag
 {
 	NSString *ret = nil;
-	if ([@"Automatically" isEqualToString:display]) {
-		ret = @"Automatic";
-	} else	if ([@"Always" isEqualToString:display]) {
-		ret = @"Always";
-	} else if ([@"When scrolling" isEqualToString:display]) {
-		ret = @"WhenScrolling";
+	switch (tag) {
+		case kSettingAutomatic:
+			ret = kAppleShowScrollBarsSettingAutomatic;
+			break;
+		case kSettingWhenScrolling:
+			ret = kAppleShowScrollBarsSettingWhenScrolling;
+			break;
+		case kSettingAlways:
+			ret = kAppleShowScrollBarsSettingAlways;
+			break;
+		default: // kSettingSystemDefault
+			ret = kAppleShowScrollBarsSettingDefault;
 	}
-	return ret;	
+	return ret;
 }
 
 #pragma mark NSTableViewDelegate methods
+
+// We don't have a purpose in ever selecting table rows.
+- (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView
+{
+	return NO;
+}
 
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
@@ -208,9 +221,9 @@
 			cellView.imageView.objectValue = info.icon;
 			result = cellView;
 		} else if([identifier isEqualToString:@"ShowScrollbars"]) {
-			ComboBoxCellView *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
+			PopUpButtonCellView *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
 			NSString *setting = info.showScrollbarsSetting;
-			[[cellView comboBox] selectItemWithObjectValue:[self displayStringFromSetting: setting]];
+			[[cellView popUpButton] selectItemWithTag:[self tagFromSetting: setting]];
 			result = cellView;
 		}
 	}
@@ -222,11 +235,6 @@
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
 	return [self.applications count];
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
-{
-	return [self.applications objectAtIndex:rowIndex];
 }
 
 @end

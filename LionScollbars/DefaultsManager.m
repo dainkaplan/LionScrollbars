@@ -3,7 +3,7 @@
 //  LionScollbars
 //
 //  Created by Dain Kaplan on 8/1/11.
-//  Copyright 2011 Dain's place. All rights reserved.
+//  Copyright 2011-2012 Dain Kaplan <dk@tempura.org>. All rights reserved.
 //
 
 #import "DefaultsManager.h"
@@ -14,24 +14,21 @@
 #define SETTINGS_VIA_FILESYSTEM 40
 #define SETTINGS_METHOD SETTINGS_VIA_FILESYSTEM
 
-
-NSString *kAppleShowScrollBarsKey = @"AppleShowScrollBars";
-
 @interface DefaultsManager(Internal)
 
-- (NSString *)_filesystem_settingValueForIdentifier:(NSString *)identifier;
-- (void)_filesystem_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier;
+- (NSString *)_filesystem_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier;
+- (void)_filesystem_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier;
 - (NSString *)_filesystem_getPreferencesFilePathIdentifier:(NSString *)identifier;
 - (NSMutableDictionary *)_filesystem_getSettingsForIdentifier:(NSString *)identifier;
 
-- (NSString *)_NSUserDefaults_settingValueForIdentifier:(NSString *)identifier;
-- (void)_NSUserDefaults_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier;
+- (NSString *)_NSUserDefaults_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier;
+- (void)_NSUserDefaults_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier;
 
-- (NSString *)_CF_settingValueForIdentifier:(NSString *)identifier;
-- (void)_CF_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier;
+- (NSString *)_CF_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier;
+- (void)_CF_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier;
 
-- (NSString *)_NSTask_settingValueForIdentifier:(NSString *)identifier;
-- (void)_NSTask_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier;
+- (NSString *)_NSTask_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier;
+- (void)_NSTask_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier;
 - (NSString *)_NSTask_runDefaultsWithArguments:(NSArray *)arguments;
 
 @end
@@ -65,35 +62,39 @@ static DefaultsManager *_sharedSingleton;
 	return _sharedSingleton;
 }
 
-- (NSString *)settingValueForIdentifier:(NSString *)identifier 
+- (NSString *)settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier 
 {
 	NSString *setting;
 #if SETTINGS_METHOD == SETTINGS_VIA_FILESYSTEM	
-	setting = [self _filesystem_settingValueForIdentifier:identifier];
+	setting = [self _filesystem_settingValueForKey:key withIdentifier:identifier];
 #elif SETTINGS_METHOD == SETTINGS_VIA_NSTASK
-	setting = [self _NSTask_settingValueForIdentifier:identifier];
+	setting = [self _NSTask_settingValueForKey:key withIdentifier:identifier];
 #elif SETTINGS_METHOD == SETTINGS_VIA_CF
-	setting = [self _CF_settingValueForIdentifier:identifier];
+	setting = [self _CF_settingValueForKey:key withIdentifier:identifier];
 #else // SETTINGS_VIA_NSUSERDEFAULTS
-	setting = [self _NSUserDefaults_settingValueForIdentifier:identifier];
+	setting = [self _NSUserDefaults_settingValueForKey:key withIdentifier:identifier];
 #endif
 	return setting;
 }
 
-- (void)setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier 
+- (void)setSettingValue:(NSString *)value forKey:(NSString *)key Identifier:(NSString *)identifier 
 {
 #if SETTINGS_METHOD == SETTINGS_VIA_FILESYSTEM	
 	[self _filesystem_setSettingValue:value 
-							forIdentifier:identifier];
+							   forKey:key
+						identifier:identifier];
 #elif SETTINGS_METHOD == SETTINGS_VIA_NSTASK
 	[self _NSTask_setSettingValue:value 
-					forIdentifier:identifier];
+						   forKey:key
+					   identifier:identifier];
 #elif SETTINGS_METHOD == SETTINGS_VIA_CF
 	[self _CF_setSettingValue:value 
-				forIdentifier:identifier];
+					   forKey:key
+				   identifier:identifier];
 #else // SETTINGS_VIA_NSUSERDEFAULTS
 	[self _NSUserDefaults_setSettingValue:value 
-							forIdentifier:identifier];	
+								   forKey:key
+							   identifier:identifier];	
 #endif
 }
 
@@ -102,32 +103,32 @@ static DefaultsManager *_sharedSingleton;
 // XXX(dkaplan): Basically, since 10.7 introduced application-sandboxing,
 //     we need to check ~/Library/Containers/[identifier]/Data/Library/Preferences/ 
 //     and then, if it doesn't exist, look in the normal place (~/Library/Preferences/).
-- (NSString *)_filesystem_settingValueForIdentifier:(NSString *)identifier
+- (NSString *)_filesystem_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier
 {
 	NSString *setting = nil;
 	if (identifier == nil) {
 		// XXX(dkaplan): Global settings work fine using the normal method.
-		setting = [self _NSUserDefaults_settingValueForIdentifier:nil];
+		setting = [self _NSUserDefaults_settingValueForKey:key withIdentifier:nil];
 	} else {
 		NSMutableDictionary *defaults = [self _filesystem_getSettingsForIdentifier:identifier];
 		if (defaults != nil) {
-			setting = [defaults objectForKey:kAppleShowScrollBarsKey];
+			setting = [defaults objectForKey:key];
 		}
 	}
 	return setting;
 }
 
-- (void)_filesystem_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier
+- (void)_filesystem_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier
 {
 	if (identifier == nil) {
 		// XXX(dkaplan): Global settings work fine using the normal method.
-		[self _NSUserDefaults_setSettingValue:value forIdentifier:nil];
+		[self _NSUserDefaults_setSettingValue:value forKey:key identifier:nil];
 	} else {
 		NSMutableDictionary *defaults = [self _filesystem_getSettingsForIdentifier:identifier];
 		if (defaults == nil) {
 			defaults = [NSMutableDictionary dictionary];
 		}
-		[defaults setValue:value forKey:kAppleShowScrollBarsKey];
+		[defaults setValue:value forKey:key];
 		NSString *filePath = [self _filesystem_getPreferencesFilePathIdentifier:identifier];
 		[defaults writeToFile:filePath atomically:YES];
 	}
@@ -170,7 +171,7 @@ static DefaultsManager *_sharedSingleton;
 
 #pragma mark Access methods using NSUserDefaults
 
-- (NSString *)_NSUserDefaults_settingValueForIdentifier:(NSString *)identifier
+- (NSString *)_NSUserDefaults_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier
 {
 	NSString *setting = nil;
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -179,12 +180,12 @@ static DefaultsManager *_sharedSingleton;
 	}
 	NSDictionary *appDefaults = [defaults persistentDomainForName:identifier];
 	if (appDefaults != nil) {
-		setting = [appDefaults valueForKey:kAppleShowScrollBarsKey];
+		setting = [appDefaults valueForKey:key];
 	}
 	return setting;
 }
 
-- (void)_NSUserDefaults_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier 
+- (void)_NSUserDefaults_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier 
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *appDefaults = nil;
@@ -195,21 +196,21 @@ static DefaultsManager *_sharedSingleton;
 	if (appDefaults == nil) {
 		appDefaults = [NSMutableDictionary dictionary];
 	}
-	[appDefaults setValue:value forKey:kAppleShowScrollBarsKey];
+	[appDefaults setValue:value forKey:key];
 	[defaults setPersistentDomain:appDefaults forName:identifier];
 	[defaults synchronize];	
 }
 
 #pragma mark Access methods using CoreFoundation
 
-- (NSString *)_CF_settingValueForIdentifier:(NSString *)identifier
+- (NSString *)_CF_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier
 {
-	return (NSString *)CFPreferencesCopyAppValue((CFStringRef)kAppleShowScrollBarsKey, (CFStringRef)identifier);
+	return (NSString *)CFPreferencesCopyAppValue((CFStringRef)key, (CFStringRef)identifier);
 }
 
-- (void)_CF_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier
+- (void)_CF_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier
 {
-	CFPreferencesSetAppValue((CFStringRef)kAppleShowScrollBarsKey, 
+	CFPreferencesSetAppValue((CFStringRef)key, 
 							 (CFStringRef)value, 
 							 (CFStringRef)identifier);
 	CFPreferencesAppSynchronize((CFStringRef)identifier);
@@ -217,38 +218,28 @@ static DefaultsManager *_sharedSingleton;
 
 #pragma mark Access methods using NSTask and /usr/bin/defaults
 
-// This stupid hack is necessary because now on 10.7 preferences are sandboxed, but 
-// the "defaults" app knows where to look for them, and has access to them.
-- (NSString *)_NSTask_settingValueForIdentifier:(NSString *)identifier
+- (NSString *)_NSTask_settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier
 {
 	if (identifier == nil) {
 		identifier = @"-g";
 	}
 	NSArray *arguments;
-	arguments = [NSArray arrayWithObjects:@"read", identifier, kAppleShowScrollBarsKey, nil];
+	arguments = [NSArray arrayWithObjects:@"read", identifier, key, nil];
 	NSString *ret = [self _NSTask_runDefaultsWithArguments:arguments];
-	if ([@"Automatic" isEqualToString:ret]) {
-		ret = @"Automatically";
-	} else	if ([@"Always" isEqualToString:ret]) {
-		ret = @"Always";
-	} else if ([@"WhenScrolling" isEqualToString:ret]) {
-		ret = @"When scrolling";
-	} else {
-		ret = nil;
-	}
+	// XXX: Possibility of returning an error message rather than the setting value.
 	return ret;
 }
 
-- (void)_NSTask_setSettingValue:(NSString *)value forIdentifier:(NSString *)identifier 
+- (void)_NSTask_setSettingValue:(NSString *)value forKey:(NSString *)key identifier:(NSString *)identifier 
 {
 	if (identifier == nil) {
 		identifier = @"-g";
 	}
 	NSArray *arguments;
 	if (value == nil) {
-		arguments = [NSArray arrayWithObjects:@"remove", identifier, kAppleShowScrollBarsKey, nil];
+		arguments = [NSArray arrayWithObjects:@"remove", identifier, key, nil];
 	} else {
-		arguments = [NSArray arrayWithObjects:@"write", identifier, kAppleShowScrollBarsKey, value, nil];
+		arguments = [NSArray arrayWithObjects:@"write", identifier, key, value, nil];
 	}
 	[self _NSTask_runDefaultsWithArguments:arguments];	
 }

@@ -3,7 +3,7 @@
 //  LionScollbars
 //
 //  Created by Dain Kaplan on 8/1/11.
-//  Copyright 2011 Dain's place. All rights reserved.
+//  Copyright 2011-2012 Dain Kaplan <dk@tempura.org>. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,9 +12,7 @@
 
 + (DefaultsManager *)sharedManager;
 
-- (NSString *)settingValueForIdentifier:(NSString *)identifier;
-
-- (void)setSettingValue:(NSString *)value 
-		  forIdentifier:(NSString *)identifier;
+- (NSString *)settingValueForKey:(NSString *)key withIdentifier:(NSString *)identifier;
+- (void)setSettingValue:(NSString *)value forKey:(NSString *)key Identifier:(NSString *)identifier;
 
 @end
