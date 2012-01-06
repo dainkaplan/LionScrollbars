@@ -2,7 +2,7 @@
 
 ## What does it do?
 
-LionScrollbars is a program that enabled fine-grained controls over how scrollbars are displayed on OS X Lion (10.7). 
+LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed on OS X Lion (10.7). 
 
 ## Why do we need it?
 
@@ -12,13 +12,17 @@ The default behavior for scrollbars in Lion only allows for three settings in Sy
 
 Application preferences are stored in `.plist`  files for each application. These preference files allow for overriding system defaults, so we write to these files for any  application for which you wish to override the system default. Unfortunately in OS X Lion a sandboxing mechanism was introduced, which drastically complicates where and how preferences are handled. 
 
-# The nitty-gritty: small guide on how to change scrollbar behavior on a per-app basis:
+# The nitty-gritty
+
+The information below is intended to be for informational purposes only (not fine examples of excellently written code).
+
+## How to change scrollbar behavior on a per-app basis:
 
 (Examples for toggling scrollbars for TextMate)
 
-defaults write com.macromates.TextMate AppleShowScrollBars Always
-defaults delete com.macromates.TextMate AppleShowScrollBars
-defaults read com.macromates.TextMate AppleShowScrollBars
+    defaults write com.macromates.TextMate AppleShowScrollBars Always
+    defaults delete com.macromates.TextMate AppleShowScrollBars
+    defaults read com.macromates.TextMate AppleShowScrollBars
 
 ## Or Globally:
 
@@ -51,7 +55,7 @@ Preferences it find properly in the sandbox, but TextEdit it does not. The worka
 `/usr/bin/defaults` for reading/writing will also therefore not work in all cases.
 
 
-### Reading/Writing preferences via NSUserDefaults
+## Reading/Writing preferences via NSUserDefaults
 
 	- (NSString *)settingForIdentifier:(NSString *)identifier 
 	{
@@ -82,12 +86,12 @@ Preferences it find properly in the sandbox, but TextEdit it does not. The worka
 		[defaults synchronize];
 	}
 	
-### Reading/Writing preferences via CoreFoundation
+## Reading/Writing preferences via CoreFoundation
 
 	CFPreferencesSetAppValue((CFStringRef)kAppleShowScrollBarsKey, (CFStringRef)value, (CFStringRef)identifier);
 	CFPreferencesAppSynchronize((CFStringRef)identifier);
 
-### Reading/Writing via NSTask and /usr/bin/defaults
+## Reading/Writing via NSTask and /usr/bin/defaults
 
 	- (NSString *)askSystemGetSettingWithIdentifier:(NSString*)identifier
 	{
@@ -145,7 +149,7 @@ Preferences it find properly in the sandbox, but TextEdit it does not. The worka
 	}
 
 
-### Reading/Writing plist files directly:
+## Reading/Writing plist files directly:
 
 *From: [http://www.ifans.com/forums/showthread.php?t=64679]*
 
