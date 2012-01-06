@@ -16,6 +16,14 @@ Application preferences are stored in `.plist`  files for each application. Thes
 
 The information below is intended to be for informational purposes only (not fine examples of excellently written code).
 
+Basically it boils down to changing the value for a setting called `AppleShowScrollBars`. The three possible values for this setting are:
+
+- "Automatic" ("Automatically based on input device", the default)
+- "WhenScrolling" ("When scrolling")
+- "Always" ("Always")
+
+Setting this setting alone affects the entire system, where setting it for a specific application (using the appropriate identifier) sets it for that application. There are a number of ways to get at this setting, either via the command line or in code through use of APIs. Each method is explained below.
+
 ## How to change scrollbar behavior on a per-app basis:
 
 (Examples for toggling scrollbars for TextMate)
@@ -28,34 +36,28 @@ The information below is intended to be for informational purposes only (not fin
 
     defaults write -g AppleShowScrollBars Always
 
-The three possible values are:
-"Automatic"     (== "Automatically based on input device", the default)
-"WhenScrolling" (== "When scrolling")
-"Always"        (== "Always")
-
-
 ## OS X Lion (10.7) 
-Lion has sandboxing of certain apps, which we need to account for.
-To check if an app will be sandboxed, look for a Contents/_CodeSignature directory.
-This is not foolproof, but maybe good enough. If the app is sandboxed, then instead
-of writing to: `~/Library/Preferences/com.company.AppName.plist` (which would be where)
-`[NSUerDefaults persistentDomainForName:]` would read from, you must look in:
-`~/Library/Containers/Data/Library/Preferences/com.company.AppName.plist`. This has to
-be done manually by reading in and writing out the file, using `[NSDictionary readFile:]`.
 
-The older way using CoreFoundation to read/write settings also does not work:
+Lion has sandboxing of certain apps (if an application declares itself as "sandboxed"), which we need to account for since this means the settings are written within the sandbox rather than the old place.
+
+To check if an app will be sandboxed, we can look for a `Contents/_CodeSignature` directory within the `AppName.app` package. This is not foolproof (?), but maybe good enough. If an app is sandboxed, then instead of writing to `~/Library/Preferences/com.company.AppName.plist` (which would be where `[NSUerDefaults persistentDomainForName:]` would read from), you must look in `~/Library/Containers/Data/Library/Preferences/com.company.AppName.plist`. This has to be done manually by reading in and writing out the file, using `[NSDictionary readFile:]`. It has to be done manually because the new sandboxing mechanism is designed not to let applications interfere with each other.
+
+The older way using CoreFoundation to read/write settings therefore does not work for sandboxed apps (code snippet below).
 
     CFPreferencesSetAppValue((CFStringRef)kAppleShowScrollBarsKey, (CFStringRef)value, (CFStringRef)identifier);
     CFPreferencesAppSynchronize((CFStringRef)identifier);
 
-This also only looks in the first, default place, and not within sandboxes.
+Again, it does not work because it is not looking in the sandboxed locations.
 
-the terminal command `defaults` seems to know about the sandboxed location for some apps, but not all.
-Preferences it find properly in the sandbox, but TextEdit it does not. The workaround to simply run
-`/usr/bin/defaults` for reading/writing will also therefore not work in all cases.
+The terminal command `defaults` seems to know about the sandboxed location for some apps, however, but not all.
+Some preferences it finds properly within the sandbox, but not all (for example, TextEdit it does not seem to find). 
+So, one workaround idea of simple using `/usr/bin/defaults` for reading/writing preferences will not work in all cases. 
 
+There does not seem to be consistency for settings at all. Even if apps should not be able to write to the sandbox for other apps, there should be a programmatic way to access them without trying to read/write `.plist` files yourself. C'mon, Apple! :)
 
 ## Reading/Writing preferences via NSUserDefaults
+
+The `NSUserDefaults` class has methods for accessing settings. These don't work for sandboxed preferences.
 
 	- (NSString *)settingForIdentifier:(NSString *)identifier 
 	{
@@ -88,10 +90,14 @@ Preferences it find properly in the sandbox, but TextEdit it does not. The worka
 	
 ## Reading/Writing preferences via CoreFoundation
 
+CoreFoundation (CF) has a C API for reading/writing preferences (does not work for sandboxed applications).
+
 	CFPreferencesSetAppValue((CFStringRef)kAppleShowScrollBarsKey, (CFStringRef)value, (CFStringRef)identifier);
 	CFPreferencesAppSynchronize((CFStringRef)identifier);
 
-## Reading/Writing via NSTask and /usr/bin/defaults
+## Reading/Writing via `NSTask` and `/usr/bin/defaults`
+
+You can also programmatic run `/usr/bin/defaults` for changing preferences with an `NSTask`, but this fails for select apps (such as TextEdit)...
 
 	- (NSString *)askSystemGetSettingWithIdentifier:(NSString*)identifier
 	{
@@ -151,8 +157,9 @@ Preferences it find properly in the sandbox, but TextEdit it does not. The worka
 
 ## Reading/Writing plist files directly:
 
-*From: [http://www.ifans.com/forums/showthread.php?t=64679]*
+You can opt to read/write `.plist` files directly, though you still need to know where to find them (which is what LionScrollbars tries to do, so look at the source if you want to know).
 
+    // From: [http://www.ifans.com/forums/showthread.php?t=64679]
     - (void)readPlist
     {
         NSString *filePath = @"/System/Library/CoreServices/SystemVersion.plist";
