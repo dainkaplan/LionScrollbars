@@ -1,6 +1,6 @@
 //
 //  DefaultsManager.h
-//  LionScollbars
+//  LionScrollbars
 //
 //  Created by Dain Kaplan on 8/1/11.
 //  Copyright 2011-2012 Dain Kaplan <dk@tempura.org>. All rights reserved.

@@ -1,12 +1,12 @@
 //
-//  LionScollbarsAppDelegate.m
-//  LionScollbars
+//  LionScrollbarsAppDelegate.m
+//  LionScrollbars
 //
 //  Created by Dain Kaplan on 7/31/11.
 //  Copyright 2011-2012 Dain Kaplan <dk@tempura.org>. All rights reserved.
 //
 
-#import "LionScollbarsAppDelegate.h"
+#import "LionScrollbarsAppDelegate.h"
 #import "PopUpButtonCellView.h"
 #import "ScrollbarsDefaultsManager.h"
 
@@ -40,13 +40,13 @@ const NSInteger kSettingAlways = 2;
 
 @end
 
-@interface LionScollbarsAppDelegate()
+@interface LionScrollbarsAppDelegate()
 - (AppInfo *)appInfoForPackageFoundAtPath:(NSString *)fullPath;
 - (NSInteger)tagFromSetting:(NSString *)setting;
 - (NSString *)settingFromTag:(NSInteger)tag;
 @end
 
-@implementation LionScollbarsAppDelegate
+@implementation LionScrollbarsAppDelegate
 
 @synthesize window;
 @synthesize applications;
