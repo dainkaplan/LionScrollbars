@@ -48,6 +48,7 @@
 		A5DE3EB513F81D0100113727 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A5E399A613F8E13A001DE87E /* ScrollbarsDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollbarsDefaultsManager.h; path = ../LionScrollbars/ScrollbarsDefaultsManager.h; sourceTree = "<group>"; };
 		A5E399A713F8E13A001DE87E /* ScrollbarsDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollbarsDefaultsManager.m; path = ../LionScrollbars/ScrollbarsDefaultsManager.m; sourceTree = "<group>"; };
+		A5F05C7614B8BEF700E5489A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +224,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A53EDB4813E458D500274EC2 /* en */,
+				A5F05C7614B8BEF700E5489A /* ja */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
