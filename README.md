@@ -17,6 +17,18 @@ Application preferences are stored in `.plist`  files for each application. Thes
 1. **I tried it with App X but it isn't working...**: First, make sure you've __quit and restarted__ the application you want to change scrollbar settings for, as this is necessary for changes to take effect. If it still does not seem to be working, please report an issue (select from top navigation) with the name of the application.
 2. **I want to remove all my per-app settings...**: Just click the "reset all" button on the bottom right of the LionScrollbars application window; this will remove the setting from all applications that have it set.
 
+## Revision History ##
+
+### v0.3 ###
+
+* Added prompt for restarting target app from within LionScrollbars.
+* Localized Popup Dialogs.
+
+### v0.2.1 ###
+
+* Fixed embarrasing typo.
+* Added credits for Japanese localization.
+
 # Disclaimer/Licensing (BSD 3-clause license)
 
 	Copyright (c) 2011-2012, Dain Kaplan
@@ -204,5 +216,3 @@ You can opt to read/write `.plist` files directly, though you still need to know
 	   NSDictionary with the plist, then changing the value of the string in the key 
 	   "ProductVersion" to what you specified */
 	}
-
-

@@ -9,11 +9,21 @@
 #import "LionScrollbarsAppDelegate.h"
 #import "PopUpButtonCellView.h"
 #import "ScrollbarsDefaultsManager.h"
+#import "NSRunningApplication+RelaunchAdditions.h"
 
 const NSInteger kSettingSystemDefault = -1;
 const NSInteger kSettingAutomatic = 0;
 const NSInteger kSettingWhenScrolling = 1;
 const NSInteger kSettingAlways = 2;
+
+const NSString *kAppRestartDialogOkayButton = @"APP_RESTART_DIALOG/OKAY_BUTTON";
+const NSString *kAppRestartDialogMessageTemplate = @"APP_RESTART_DIALOG/MESSAGE_TEMPLATE";
+const NSString *kAppRestartDialogRestartButton = @"APP_RESTART_DIALOG/RESTART_BUTTON";
+const NSString *kAppRestartDialogInformationText = @"APP_RESTART_DIALOG/INFORMATION_TEXT";
+
+const NSString *kResetAllSettingsDialogResetAllButton = @"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON";
+const NSString *kResetAllSettingsDialogCancelButton = @"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON";
+const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT";
 
 #define VALIDATE_SYSTEM_SETTING(x) x = (x < kSettingAutomatic ? kSettingAutomatic : x)
 
@@ -109,9 +119,9 @@ const NSInteger kSettingAlways = 2;
 - (IBAction)resetAllClicked:(id)sender {
 	
 	NSAlert *alert = [[NSAlert alloc] init];
-	[alert addButtonWithTitle:@"Reset All"];
-	[alert addButtonWithTitle:@"Cancel"];
-	[alert setMessageText:[NSString stringWithFormat:@"Really reset all applications?"]];
+	[alert addButtonWithTitle: NSLocalizedString(kResetAllSettingsDialogResetAllButton, @"Reset All")];
+	[alert addButtonWithTitle:NSLocalizedString(kResetAllSettingsDialogCancelButton, @"Cancel")];
+	[alert setMessageText:[NSString stringWithFormat:NSLocalizedString(kResetAllSettingsDialogMessageText, @"Really reset all applications?")]];
 	[alert setAlertStyle:NSWarningAlertStyle];
 	NSInteger res = [alert runModal];
 	if (res == NSAlertFirstButtonReturn) {
@@ -146,6 +156,19 @@ const NSInteger kSettingAlways = 2;
 
 #pragma mark NSComboBoxDelegate methods
 
+- (BOOL)confirmAppRelaunch:(NSRunningApplication *)info {
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert addButtonWithTitle: NSLocalizedString(kAppRestartDialogOkayButton, @"OK")];
+	[alert setIcon: info.icon];
+	[alert addButtonWithTitle: NSLocalizedString(kAppRestartDialogRestartButton, [@"Restart now")];
+	[alert setMessageText:[NSString stringWithFormat: NSLocalizedString(kAppRestartDialogMessageTemplate, @"%@ is running."), info.localizedName]];
+	[alert setInformativeText:NSLocalizedString(kAppRestartDialogInformationText, @"The application needs to be restarted for changes to take effect. Be sure to save your data.")];
+	[alert setAlertStyle:NSWarningAlertStyle];
+	BOOL shouldRelaunch = [alert runModal] == NSAlertSecondButtonReturn;
+	[alert release];
+	return shouldRelaunch;
+}
+
 //- (void)comboBoxSelectionDidChange:(NSNotification *)notification
 - (IBAction)popUpButtonValueChanged:(id)sender
 {
@@ -156,11 +179,18 @@ const NSInteger kSettingAlways = 2;
 	NSLog(@"Row is: %ld", row);
 	if (popup == systemDefaultPopUpButton) {
 		[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:nil];
+		// TODO: Should flag in the UI someplace app restarts are necessary.
 	} else {
 		if (row > -1) {
 			AppInfo *info = [applications objectAtIndex:row];
 			NSLog(@"App Info (new): %@ (%@) = %@", info.name, info.identifier, val);
 			[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:info.identifier];
+			// TODO: Optionally confirm with user to restart app.
+			ConfirmRelaunchBlock block = ^BOOL(NSRunningApplication *app) {
+				NSLog(@"Going to show prompt for: %@ (%@)", app.localizedName, app.bundleIdentifier);
+				return [self confirmAppRelaunch: app];
+			};
+			[NSRunningApplication relaunchAppsWithBundleIdentifier:info.identifier usingConfirmationBlock: block];
 		}
 	}
 }

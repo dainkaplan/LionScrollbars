@@ -1,0 +1,9 @@
+
+"APP_RESTART_DIALOG/OKAY_BUTTON" = "OK";
+"APP_RESTART_DIALOG/MESSAGE_TEMPLATE" = "%@ is running.";
+"APP_RESTART_DIALOG/RESTART_BUTTON" = "Restart Now";
+"APP_RESTART_DIALOG/INFORMATION_TEXT" = "The application needs to be restarted for changes to take effect. Be sure to save your data.";
+
+"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON" = "Reset All";
+"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON" = "Cancel";
+"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT" = "Really reset all applications?";
