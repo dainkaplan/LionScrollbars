@@ -60,10 +60,13 @@ const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG
 
 @synthesize window;
 @synthesize applications;
+@synthesize filteredApplications;
+@synthesize searchField;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	self.applications = [NSMutableArray arrayWithCapacity:20];
+	self.filteredApplications = [NSMutableArray arrayWithCapacity:20];
 	NSInteger defaultSettingTag = [self tagFromSetting:[[ScrollbarsDefaultsManager sharedManager] settingValueForIdentifier:nil]];
 	VALIDATE_SYSTEM_SETTING(defaultSettingTag);
 	[systemDefaultPopUpButton selectItemWithTag:defaultSettingTag];
@@ -108,7 +111,7 @@ const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG
 	
 	NSInteger cnt = [self.applications count];
 	applicationCount.stringValue = [NSString stringWithFormat: @"%ld", cnt];
-	[applicationsTableView reloadData];
+	[self performFilter:self];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
@@ -182,7 +185,7 @@ const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG
 		// TODO: Should flag in the UI someplace app restarts are necessary.
 	} else {
 		if (row > -1) {
-			AppInfo *info = [applications objectAtIndex:row];
+			AppInfo *info = [filteredApplications objectAtIndex:row];
 			NSLog(@"App Info (new): %@ (%@) = %@", info.name, info.identifier, val);
 			[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:info.identifier];
 			// TODO: Optionally confirm with user to restart app.
@@ -242,8 +245,8 @@ const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG
                   row:(NSInteger)row {
 	
 	NSTableCellView *result = nil; 
-	if ([self.applications count] > row) {
-		AppInfo *info = [self.applications objectAtIndex: row];
+	if ([self.filteredApplications count] > row) {
+		AppInfo *info = [self.filteredApplications objectAtIndex: row];
 		NSString *identifier = [tableColumn identifier];
 		if ([identifier isEqualToString:@"ApplicationNameIcon"]) {
 			NSTableCellView *cellView = [tableView makeViewWithIdentifier:identifier owner:self];
@@ -260,11 +263,30 @@ const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG
 	return result;
 }
 
+#pragma mark Search methods
+												 
+- (IBAction)performFilter:(id)sender {
+	NSString *search = [searchField stringValue];
+	NSLog(@"Filter text: %@", search);
+	[self.filteredApplications removeAllObjects];
+	if ([search length] < 1) {
+		[self.filteredApplications addObjectsFromArray:self.applications];
+	} else if ([self.applications count] > 0) {
+		for (AppInfo *app in self.applications) {
+			NSRange range = [app.name rangeOfString:search options:NSCaseInsensitiveSearch];
+			if (range.location != NSNotFound) {
+				[self.filteredApplications addObject:app];
+			}
+		}
+	}
+	[applicationsTableView reloadData];
+}
+												 
 #pragma mark NSTableViewDatasource methods
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [self.applications count];
+	return [self.filteredApplications count];
 }
 
 @end

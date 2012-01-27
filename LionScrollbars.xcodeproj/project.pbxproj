@@ -248,11 +248,11 @@
 			children = (
 				A53EDB6713E5995800274EC2 /* LionScrollbars.entitlements */,
 				A53EDB4A13E458D500274EC2 /* LionScrollbarsAppDelegate.h */,
+				A53EDB4B13E458D500274EC2 /* LionScrollbarsAppDelegate.m */,
 				A5E399A613F8E13A001DE87E /* ScrollbarsDefaultsManager.h */,
 				A5E399A713F8E13A001DE87E /* ScrollbarsDefaultsManager.m */,
 				A56606A713E64563008C3FE1 /* DefaultsManager.h */,
 				A56606A813E64563008C3FE1 /* DefaultsManager.m */,
-				A53EDB4B13E458D500274EC2 /* LionScrollbarsAppDelegate.m */,
 				A53EDB4D13E458D500274EC2 /* MainMenu.xib */,
 				A53EDB3F13E458D500274EC2 /* Supporting Files */,
 				A53EDB5913E50ACD00274EC2 /* PopUpButtonCellView.h */,
@@ -789,6 +789,7 @@
 				A56B03DF14D142E2002B858C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A5AF34AE14D13B6F00F292CD /* Build configuration list for PBXNativeTarget "ScrollbarInject" */ = {
 			isa = XCConfigurationList;
