@@ -58,14 +58,21 @@ const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG
 
 @implementation LionScrollbarsAppDelegate
 
+@synthesize tabView;
 @synthesize window;
 @synthesize applications;
 @synthesize filteredApplications;
 @synthesize searchField;
 
+- (void)applicationWillFinishLaunching:(NSNotification *)notification
+{
+	NSInteger appearanceTabIndex = [self.tabView indexOfTabViewItemWithIdentifier:@"appearanceTab"];
+	[self.tabView removeTabViewItem: [self.tabView tabViewItemAtIndex:appearanceTabIndex]];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	self.applications = [NSMutableArray arrayWithCapacity:20];
+	 self.applications = [NSMutableArray arrayWithCapacity:20];
 	self.filteredApplications = [NSMutableArray arrayWithCapacity:20];
 	NSInteger defaultSettingTag = [self tagFromSetting:[[ScrollbarsDefaultsManager sharedManager] settingValueForIdentifier:nil]];
 	VALIDATE_SYSTEM_SETTING(defaultSettingTag);

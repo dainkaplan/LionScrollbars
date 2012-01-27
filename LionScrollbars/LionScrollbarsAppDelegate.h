@@ -18,7 +18,9 @@
 	NSMutableArray *applications;
 	NSSearchField *searchField;
 	NSString *tmpSettingValue;
+	NSTabView *tabView;
 }
+@property (assign) IBOutlet NSTabView *tabView;
 
 @property (assign) IBOutlet NSWindow *window;
 @property (retain) NSMutableArray *applications;
