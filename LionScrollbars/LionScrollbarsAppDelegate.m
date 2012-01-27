@@ -16,14 +16,14 @@ const NSInteger kSettingAutomatic = 0;
 const NSInteger kSettingWhenScrolling = 1;
 const NSInteger kSettingAlways = 2;
 
-const NSString *kAppRestartDialogOkayButton = @"APP_RESTART_DIALOG/OKAY_BUTTON";
-const NSString *kAppRestartDialogMessageTemplate = @"APP_RESTART_DIALOG/MESSAGE_TEMPLATE";
-const NSString *kAppRestartDialogRestartButton = @"APP_RESTART_DIALOG/RESTART_BUTTON";
-const NSString *kAppRestartDialogInformationText = @"APP_RESTART_DIALOG/INFORMATION_TEXT";
+NSString *kAppRestartDialogOkayButton = @"APP_RESTART_DIALOG/OKAY_BUTTON";
+NSString *kAppRestartDialogMessageTemplate = @"APP_RESTART_DIALOG/MESSAGE_TEMPLATE";
+NSString *kAppRestartDialogRestartButton = @"APP_RESTART_DIALOG/RESTART_BUTTON";
+NSString *kAppRestartDialogInformationText = @"APP_RESTART_DIALOG/INFORMATION_TEXT";
 
-const NSString *kResetAllSettingsDialogResetAllButton = @"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON";
-const NSString *kResetAllSettingsDialogCancelButton = @"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON";
-const NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT";
+NSString *kResetAllSettingsDialogResetAllButton = @"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON";
+NSString *kResetAllSettingsDialogCancelButton = @"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON";
+NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT";
 
 #define VALIDATE_SYSTEM_SETTING(x) x = (x < kSettingAutomatic ? kSettingAutomatic : x)
 

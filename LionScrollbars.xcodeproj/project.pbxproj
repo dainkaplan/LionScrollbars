@@ -123,8 +123,8 @@
 		A5AF34A814D13B6F00F292CD /* ScrollbarInjectAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollbarInjectAppDelegate.h; sourceTree = "<group>"; };
 		A5AF34A914D13B6F00F292CD /* ScrollbarInjectAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollbarInjectAppDelegate.m; sourceTree = "<group>"; };
 		A5AF34AC14D13B6F00F292CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A5CC752614D2817400E35F28 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A5DE3EB313F8161000113727 /* LionScrollbars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LionScrollbars.png; sourceTree = "<group>"; };
-		A5DE3EB513F81D0100113727 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A5E399A613F8E13A001DE87E /* ScrollbarsDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollbarsDefaultsManager.h; path = ../LionScrollbars/ScrollbarsDefaultsManager.h; sourceTree = "<group>"; };
 		A5E399A713F8E13A001DE87E /* ScrollbarsDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollbarsDefaultsManager.m; path = ../LionScrollbars/ScrollbarsDefaultsManager.m; sourceTree = "<group>"; };
 		A5F05C7614B8BEF700E5489A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ja; path = ja.lproj/Credits.rtf; sourceTree = "<group>"; };
@@ -562,7 +562,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A53EDB4E13E458D500274EC2 /* en */,
-				A5DE3EB513F81D0100113727 /* ja */,
+				A5CC752614D2817400E35F28 /* ja */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
