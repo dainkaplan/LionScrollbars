@@ -19,6 +19,11 @@ Application preferences are stored in `.plist`  files for each application. Thes
 
 ## Revision History ##
 
+### v0.4 ###
+
+* Added filter textfield for quickly finding the app whose settings you want to change.
+* SIMBL plugin code has been added, but is not linked to UI (only available in source).
+
 ### v0.3 ###
 
 * Added prompt for restarting target app from within LionScrollbars.
