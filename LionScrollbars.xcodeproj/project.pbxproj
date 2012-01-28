@@ -134,6 +134,7 @@
 		A57BBB3214D4337900189114 /* SIMBL-0.9.9.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SIMBL-0.9.9.pkg"; path = "SIMBL-0.9.9/SIMBL-0.9.9.pkg"; sourceTree = SOURCE_ROOT; };
 		A57BBB3414D4396100189114 /* SIMBL Uninstaller.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = "SIMBL Uninstaller.app"; path = "SIMBL-0.9.9/SIMBL Uninstaller.app"; sourceTree = SOURCE_ROOT; };
 		A57BBB3514D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "SIMBL-License-GNU_GPL_v2.txt"; path = "SIMBL-0.9.9/SIMBL-License-GNU_GPL_v2.txt"; sourceTree = SOURCE_ROOT; };
+		A57BBB3914D448C300189114 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A582E0C714D2ADCD0033624B /* NSObject+DefaultsAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+DefaultsAdditions.h"; path = "LionScrollbars/NSObject+DefaultsAdditions.h"; sourceTree = SOURCE_ROOT; };
 		A582E0C814D2ADCD0033624B /* NSObject+DefaultsAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+DefaultsAdditions.m"; path = "LionScrollbars/NSObject+DefaultsAdditions.m"; sourceTree = SOURCE_ROOT; };
 		A582E0CB14D2AE860033624B /* HackedScrollers+DefaultsAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HackedScrollers+DefaultsAdditions.h"; sourceTree = "<group>"; };
@@ -149,7 +150,6 @@
 		A5AF34A814D13B6F00F292CD /* ScrollbarInjectAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollbarInjectAppDelegate.h; sourceTree = "<group>"; };
 		A5AF34A914D13B6F00F292CD /* ScrollbarInjectAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollbarInjectAppDelegate.m; sourceTree = "<group>"; };
 		A5AF34AC14D13B6F00F292CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		A5CC752614D2817400E35F28 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A5CC753714D28DF500E35F28 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		A5DE3EB313F8161000113727 /* LionScrollbars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LionScrollbars.png; sourceTree = "<group>"; };
 		A5E399A613F8E13A001DE87E /* ScrollbarsDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollbarsDefaultsManager.h; path = ../LionScrollbars/ScrollbarsDefaultsManager.h; sourceTree = "<group>"; };
@@ -623,7 +623,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A53EDB4E13E458D500274EC2 /* en */,
-				A5CC752614D2817400E35F28 /* ja */,
+				A57BBB3914D448C300189114 /* ja */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
