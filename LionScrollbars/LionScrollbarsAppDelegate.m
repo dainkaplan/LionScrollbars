@@ -14,29 +14,29 @@
 #import "HackedScrollersUserDefaults.h"
 #import "NSObject+DefaultsAdditions.h"
 
-const NSInteger kSettingSystemDefault = -1;
-const NSInteger kSettingAutomatic = 0;
-const NSInteger kSettingWhenScrolling = 1;
-const NSInteger kSettingAlways = 2;
+const NSInteger const kSettingSystemDefault = -1;
+const NSInteger const kSettingAutomatic = 0;
+const NSInteger const kSettingWhenScrolling = 1;
+const NSInteger const kSettingAlways = 2;
 
-NSString *kAppRestartDialogOkayButton = @"APP_RESTART_DIALOG/OKAY_BUTTON";
-NSString *kAppRestartDialogMessageTemplate = @"APP_RESTART_DIALOG/MESSAGE_TEMPLATE";
-NSString *kAppRestartDialogRestartButton = @"APP_RESTART_DIALOG/RESTART_BUTTON";
-NSString *kAppRestartDialogInformationText = @"APP_RESTART_DIALOG/INFORMATION_TEXT";
+NSString * const kAppRestartDialogOkayButton = @"APP_RESTART_DIALOG/OKAY_BUTTON";
+NSString * const kAppRestartDialogMessageTemplate = @"APP_RESTART_DIALOG/MESSAGE_TEMPLATE";
+NSString * const kAppRestartDialogRestartButton = @"APP_RESTART_DIALOG/RESTART_BUTTON";
+NSString * const kAppRestartDialogInformationText = @"APP_RESTART_DIALOG/INFORMATION_TEXT";
 
-NSString *kEnablePluginDialogOkayButton = @"ENABLE_PLUGIN_DIALOG/OKAY_BUTTON";
-NSString *kEnablePluginDialogCancelButton = @"ENABLE_PLUGIN_DIALOG/CANCEL_BUTTON";
-NSString *kEnablePluginDialogMessageTemplate = @"ENABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE";
-NSString *kEnablePluginDialogInformationText = @"ENABLE_PLUGIN_DIALOG/INFORMATION_TEXT";
+NSString * const kEnablePluginDialogOkayButton = @"ENABLE_PLUGIN_DIALOG/OKAY_BUTTON";
+NSString * const kEnablePluginDialogCancelButton = @"ENABLE_PLUGIN_DIALOG/CANCEL_BUTTON";
+NSString * const kEnablePluginDialogMessageTemplate = @"ENABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE";
+NSString * const kEnablePluginDialogInformationText = @"ENABLE_PLUGIN_DIALOG/INFORMATION_TEXT";
 
-NSString *kDisablePluginDialogOkayButton = @"DISABLE_PLUGIN_DIALOG/OKAY_BUTTON";
-NSString *kDisablePluginDialogCancelButton = @"DISABLE_PLUGIN_DIALOG/CANCEL_BUTTON";
-NSString *kDisablePluginDialogMessageTemplate = @"DISABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE";
-NSString *kDisablePluginDialogInformationText = @"DISABLE_PLUGIN_DIALOG/INFORMATION_TEXT";
+NSString * const kDisablePluginDialogOkayButton = @"DISABLE_PLUGIN_DIALOG/OKAY_BUTTON";
+NSString * const kDisablePluginDialogCancelButton = @"DISABLE_PLUGIN_DIALOG/CANCEL_BUTTON";
+NSString * const kDisablePluginDialogMessageTemplate = @"DISABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE";
+NSString * const kDisablePluginDialogInformationText = @"DISABLE_PLUGIN_DIALOG/INFORMATION_TEXT";
 
-NSString *kResetAllSettingsDialogResetAllButton = @"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON";
-NSString *kResetAllSettingsDialogCancelButton = @"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON";
-NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT";
+NSString * const kResetAllSettingsDialogResetAllButton = @"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON";
+NSString * const kResetAllSettingsDialogCancelButton = @"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON";
+NSString * const kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT";
 
 BOOL simblInstalled(void);
 BOOL pluginInstalled(void);
@@ -109,6 +109,7 @@ void modifyPlugin(BOOL install) {
 - (void)loadPluginSettings;
 - (void)pluginSettingsChanged;
 - (BOOL)checkForSimbl;
+- (void)checkForSimblRecurring;
 @end
 
 @implementation LionScrollbarsAppDelegate
@@ -184,7 +185,9 @@ void modifyPlugin(BOOL install) {
 	//NSInteger appearanceTabIndex = [self.tabView indexOfTabViewItemWithIdentifier:@"appearanceTab"];
 	//[self.tabView removeTabViewItem: [self.tabView tabViewItemAtIndex:appearanceTabIndex]];
 	
-	[self checkForSimbl];
+	if (![self checkForSimbl]) {
+		[self checkForSimblRecurring];
+	}
 }
 
 - (BOOL)checkForSimbl {
@@ -406,7 +409,8 @@ void modifyPlugin(BOOL install) {
 
 #pragma mark Setup simbl
 
-- (void)checkForSimblRecurring {
+- (void)checkForSimblRecurring
+{
 	// Check every 2 seconds until it's installed.
 	if (![self checkForSimbl]) {
 		[self performSelector:@selector(checkForSimblRecurring) withObject:nil afterDelay:2.0];
@@ -417,17 +421,18 @@ void modifyPlugin(BOOL install) {
 {
 	NSString* pathToPackage = [[NSBundle mainBundle] pathForResource:@"SIMBL-0.9.9" ofType:@"pkg"];
 	[[NSWorkspace sharedWorkspace] openFile:pathToPackage];
-	[self checkForSimblRecurring];
 }
 
 - (IBAction)readmoreAboutSimbl:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.macupdate.com/app/mac/18351/simbl"]];
+	NSURL *url = [NSURL URLWithString:@"http://www.macupdate.com/app/mac/18351/simbl"];
+	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 - (IBAction)viewSimblLicense:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.gnu.org/licenses/old-licenses/gpl-2.0.html"]];
+	NSURL *url = [NSURL URLWithString:@"http://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html"];
+	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
 #pragma mark Plugin config methods

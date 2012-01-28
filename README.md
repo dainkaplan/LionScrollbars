@@ -1,23 +1,33 @@
-# Welcome to LionScrollbars v0.2!
+# Welcome to LionScrollbars v0.5!
 
 ## What does it do?
 
-LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed in OS X Lion (10.7). 
+LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed in OS X Lion (10.7). It also has (experimental) support for customizing the appearance of scrollbars, such as preventing overlays from fading out, or replacing the "legacy" scrollers with something better looking.
 
 ## Why do we need it?
 
 The default behavior for scrollbars in Lion only allows for three settings in System Preferences (always show, always hide, mouse-device specific); these settings apply to ALL applications. However, for some application you might find yourself wishing you could see a scrollbar (such as if you're editing text or code, etc.); with this program you can do that!
 
+Further, if you want to customize the scrollers (prevent the overlay scrollers from fading out, or change how the legacy style scrollers look) now with the SIMBL-plugin, you can!
+
 ## How does it work?
 
 Application preferences are stored in `.plist`  files for each application. These preference files allow for overriding system defaults, so we write to these files for any  application for which you wish to override the system default. Unfortunately in OS X Lion a sandboxing mechanism was introduced, which drastically complicates where and how preferences are handled. 
+
+The customized scrollers work via a plugin framework called SIMBL, that allows for loading code into running programs (such as for the Safari PithHelmet extension up to 5.0). The LionScrollbars SIMBL-plugin, when loaded, overrides the extisting scrollbar rendering methods to make the scrollbars look different.
 
 ## Troubleshooting/Q & A
 
 1. **I tried it with App X but it isn't working...**: First, make sure you've __quit and restarted__ the application you want to change scrollbar settings for, as this is necessary for changes to take effect. If it still does not seem to be working, please report an issue (select from top navigation) with the name of the application.
 2. **I want to remove all my per-app settings...**: Just click the "reset all" button on the bottom right of the LionScrollbars application window; this will remove the setting from all applications that have it set.
+3. **I installed the SIMBL plugin to customize legacy scrollers, but not all apps are being customized...**: Most native OS X apps should work, but some (such as Safari and Xcode) don't. Feel free to report any apps that aren't working. Remember, the customization feature is experimental.
+4. **Customized legacy scrollers take a second to initialize in some apps...**: This is a limitation of the technique used to override the scrollbars. Sorry.
 
 ## Revision History ##
+
+### v0.5 ###
+
+* Added appearance tab for installing SIMBL/configuring SIMBL plugin for customizing scroller appearance across apps.
 
 ### v0.4 ###
 
@@ -48,8 +58,11 @@ Application preferences are stored in `.plist`  files for each application. Thes
 	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+# The nitty-gritty on Scrollbar overriding (via SIMBL)
 
-# The nitty-gritty
+This is complicated, and already explained in the following post of mine: http://rants.tempura.org/2012/01/22/hacking-scrollbars.html
+
+# The nitty-gritty on Scrollbar preferences
 
 The information below is intended to be for informational purposes only (not fine examples of excellently written code).
 

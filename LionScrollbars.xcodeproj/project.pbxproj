@@ -18,7 +18,6 @@
 		A53EDB5B13E50ACD00274EC2 /* PopUpButtonCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A53EDB5A13E50ACD00274EC2 /* PopUpButtonCellView.m */; };
 		A53EDB5D13E57A5C00274EC2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53EDB5C13E57A5C00274EC2 /* CoreFoundation.framework */; };
 		A53EDB6913E5997400274EC2 /* LionScrollbars.icns in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB6813E5997400274EC2 /* LionScrollbars.icns */; };
-		A53EDB6B13E59CB200274EC2 /* icon.psd in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB6A13E59CB200274EC2 /* icon.psd */; };
 		A5564D2614C8F3A80007FA0E /* NSRunningApplication+RelaunchAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A5564D2514C8F3A80007FA0E /* NSRunningApplication+RelaunchAdditions.m */; };
 		A56606A913E64563008C3FE1 /* DefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A56606A813E64563008C3FE1 /* DefaultsManager.m */; };
 		A56B03BE14D13C5D002B858C /* HackedLegacyScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = A56B03B514D13C5D002B858C /* HackedLegacyScroller.m */; };
@@ -495,7 +494,6 @@
 				A53EDB4913E458D500274EC2 /* Credits.rtf in Resources */,
 				A53EDB4F13E458D500274EC2 /* MainMenu.xib in Resources */,
 				A53EDB6913E5997400274EC2 /* LionScrollbars.icns in Resources */,
-				A53EDB6B13E59CB200274EC2 /* icon.psd in Resources */,
 				A5DE3EB413F8161000113727 /* LionScrollbars.png in Resources */,
 				A59BDBF514C911AC000B6588 /* Localizable.strings in Resources */,
 				A57BBB3314D4337900189114 /* SIMBL-0.9.9.pkg in Resources */,
