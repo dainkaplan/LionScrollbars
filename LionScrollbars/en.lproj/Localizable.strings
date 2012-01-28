@@ -7,3 +7,13 @@
 "RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON" = "Reset All";
 "RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON" = "Cancel";
 "RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT" = "Really reset all applications?";
+
+"ENABLE_PLUGIN_DIALOG/OKAY_BUTTON" = "Install";
+"ENABLE_PLUGIN_DIALOG/CANCEL_BUTTON" = "Cancel";
+"ENABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE" = "Install plugin?";
+"ENABLE_PLUGIN_DIALOG/INFORMATION_TEXT" = "This will enable the SIMBL-based scroller plugin; running applications will not be affected until they are restarted.";
+
+"DISABLE_PLUGIN_DIALOG/OKAY_BUTTON" = "Uninstall";
+"DISABLE_PLUGIN_DIALOG/CANCEL_BUTTON" = "Cancel";
+"DISABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE" = "Uninstall plugin?";
+"DISABLE_PLUGIN_DIALOG/INFORMATION_TEXT" = "This will disable the SIMBL-based scroller plugin; the plugin will continue to function in running applications until they are restarted.";

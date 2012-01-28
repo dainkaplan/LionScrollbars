@@ -17,10 +17,16 @@
 
 static BOOL __useGradient = YES;
 static BOOL __drawBackground = YES;
+static BOOL __roundedCorners = YES;
 
 + (BOOL) overlaysScrollView 
 {
 	return NO;
+}
+
++ (void) setRoundedCorners:(BOOL)enable
+{
+	__roundedCorners = enable;
 }
 
 + (BOOL) useGradient 
@@ -35,7 +41,7 @@ static BOOL __drawBackground = YES;
 
 + (BOOL) roundedCorners
 {
-    return YES;
+    return __roundedCorners;
 }
 
 + (BOOL) isCompatibleWithOverlayScrollers 
@@ -164,11 +170,17 @@ static BOOL __drawBackground = YES;
 		[gradient drawInBezierPath:path angle:isVertical ? 0 : 90];
 		[gradient release];
 	} else {
+		[[NSColor lightGrayColor] setFill];
 		[path fill];
 	}
 	[[NSColor colorWithCalibratedRed:0.5 green:0.5 blue:0.5 alpha:1.0] set];
 	[path setLineWidth:1];
 	[path stroke];
+}
+
+- (void)setHackedScrollerSettings:(HackedScrollerSettings)settings
+{
+	// TODO
 }
 
 @end

@@ -10,6 +10,9 @@
 #import "PopUpButtonCellView.h"
 #import "ScrollbarsDefaultsManager.h"
 #import "NSRunningApplication+RelaunchAdditions.h"
+//#import "HackedScrollers+DefaultsAdditions.h"
+#import "HackedScrollersUserDefaults.h"
+#import "NSObject+DefaultsAdditions.h"
 
 const NSInteger kSettingSystemDefault = -1;
 const NSInteger kSettingAutomatic = 0;
@@ -21,9 +24,55 @@ NSString *kAppRestartDialogMessageTemplate = @"APP_RESTART_DIALOG/MESSAGE_TEMPLA
 NSString *kAppRestartDialogRestartButton = @"APP_RESTART_DIALOG/RESTART_BUTTON";
 NSString *kAppRestartDialogInformationText = @"APP_RESTART_DIALOG/INFORMATION_TEXT";
 
+NSString *kEnablePluginDialogOkayButton = @"ENABLE_PLUGIN_DIALOG/OKAY_BUTTON";
+NSString *kEnablePluginDialogCancelButton = @"ENABLE_PLUGIN_DIALOG/CANCEL_BUTTON";
+NSString *kEnablePluginDialogMessageTemplate = @"ENABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE";
+NSString *kEnablePluginDialogInformationText = @"ENABLE_PLUGIN_DIALOG/INFORMATION_TEXT";
+
+NSString *kDisablePluginDialogOkayButton = @"DISABLE_PLUGIN_DIALOG/OKAY_BUTTON";
+NSString *kDisablePluginDialogCancelButton = @"DISABLE_PLUGIN_DIALOG/CANCEL_BUTTON";
+NSString *kDisablePluginDialogMessageTemplate = @"DISABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE";
+NSString *kDisablePluginDialogInformationText = @"DISABLE_PLUGIN_DIALOG/INFORMATION_TEXT";
+
 NSString *kResetAllSettingsDialogResetAllButton = @"RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON";
 NSString *kResetAllSettingsDialogCancelButton = @"RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON";
 NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT";
+
+BOOL simblInstalled(void);
+BOOL pluginInstalled(void);
+void modifyPlugin(BOOL install);
+
+BOOL simblInstalled()
+{
+	return [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/ScriptingAdditions/SIMBL.osax"];
+}
+
+BOOL pluginInstalled()
+{
+	return 
+	[[NSFileManager defaultManager] fileExistsAtPath:@"/Library/Application Support/SIMBL/Plugins/LionScrollbarsSIMBLBundle.bundle"];
+	//|| [[NSFileManager defaultManager] fileExistsAtPath:[@"~/Library/Application Support/SIMBL/Plugins/LionScrollbarsSIMBLBundle.bundle" stringByExpandingTildeInPath]];
+}
+
+void modifyPlugin(BOOL install) {
+	NSError *error = NULL;
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"LionScrollbarsSIMBLBundle" ofType:@"bundle"];
+	NSString *libraryPath = [@"/Library/Application Support/SIMBL/Plugins/" stringByExpandingTildeInPath];
+	NSString *libraryBundle = [@"/Library/Application Support/SIMBL/Plugins/LionScrollbarsSIMBLBundle.bundle" stringByExpandingTildeInPath];
+	if (install) {
+		NSLog(@"Copying: %@\nTo: %@", path, libraryPath);
+		if (![[NSFileManager defaultManager] fileExistsAtPath:libraryPath]) {
+			[[NSFileManager defaultManager] createDirectoryAtPath:libraryPath withIntermediateDirectories:YES attributes:NULL error:&error];
+		}
+		[[NSFileManager defaultManager] copyItemAtPath:path toPath:libraryBundle error: &error];
+	} else {
+		NSLog(@"Removing: %@", libraryBundle);
+		[[NSFileManager defaultManager] removeItemAtPath:libraryBundle error:&error];
+	}
+	if (error != NULL) {
+		NSLog(@"%@", [error localizedDescription]);
+	}
+}
 
 #define VALIDATE_SYSTEM_SETTING(x) x = (x < kSettingAutomatic ? kSettingAutomatic : x)
 
@@ -54,20 +103,105 @@ NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSA
 - (AppInfo *)appInfoForPackageFoundAtPath:(NSString *)fullPath;
 - (NSInteger)tagFromSetting:(NSString *)setting;
 - (NSString *)settingFromTag:(NSInteger)tag;
+- (BOOL)confirmPluginEnable;
+- (BOOL)confirmPluginDisable;
+- (void)updatePluginStatus;
+- (void)loadPluginSettings;
+- (void)pluginSettingsChanged;
+- (BOOL)checkForSimbl;
 @end
 
 @implementation LionScrollbarsAppDelegate
 
+@synthesize settingTrackAlpha;
+@synthesize settingKnobAlpha;
+@synthesize settingRoundedCorners;
+@synthesize settingDrawBackground;
+@synthesize settingUseGradient;
+@synthesize settingLegacyScrollersToggle;
+@synthesize settingOverlayScrollersToggle;
+@synthesize pluginSettingsView;
+@synthesize legacyScrollersPreview;
+@synthesize overylayScrollersPreview;
 @synthesize tabView;
+@synthesize pluginStatusToggle;
+@synthesize pluginStatusLabel;
+@synthesize simblNotFoundView;
+@synthesize simblFoundView;
 @synthesize window;
 @synthesize applications;
 @synthesize filteredApplications;
 @synthesize searchField;
 
+- (void)updatePluginStatus 
+{
+	if (pluginInstalled()) {
+		[self.pluginStatusLabel setStringValue:@"Installed"];
+		[self.pluginStatusToggle setSelectedSegment:0];
+	} else {
+		[self.pluginStatusLabel setStringValue:@"Not Installed"];
+		[self.pluginStatusToggle setSelectedSegment:1];
+	}
+}
+
+- (void)loadHacks
+{
+	NSString* pathToBundle = [[NSBundle mainBundle] pathForResource:@"LionScrollbarsSIMBLBundle" ofType:@"bundle"];
+    NSBundle* bundle = [NSBundle bundleWithPath:pathToBundle];
+    
+    Class plugin = [bundle classNamed:@"LSBPlugin"];
+    NSAssert(plugin != nil, @"Couldn't load LSBPlugin");
+    [plugin initialize];
+	[[plugin sharedInstance] initializeScrollbarHacks:YES];
+	
+}
+
+- (void)pluginSettingsChanged
+{
+	// XXX: The scroller plugin listens for this event, so broadcasting it forces a reload of settings.
+	[[NSDistributedNotificationCenter defaultCenter] postNotificationName:kLsbSettingsChangedNotification object:nil userInfo:nil deliverImmediately:YES];
+}
+
+- (void)loadPluginSettings
+{
+	// XXX: SIMBL might have injected the plugin into this app, but it might not have. We therefore check to see if the class has been loaded, and if not, load the bundle ourselves.
+	if (NSClassFromString(@"HackedLegacyScroller") == nil) {
+		[self loadHacks];
+	}
+
+	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();	
+	[self.settingKnobAlpha setFloatValue: settings.scrollerKnobMinAlpha];
+	[self.settingTrackAlpha setFloatValue: settings.scrollerTrackMinAlpha];
+	[self.settingRoundedCorners setSelectedSegment: settings.roundedCorners ? 0 : 1];
+	[self.settingUseGradient setSelectedSegment: settings.useGradient ? 0 : 1];
+	[self.settingDrawBackground setSelectedSegment: settings.drawBackgrounds ? 0 : 1];
+	[self.settingLegacyScrollersToggle setSelectedSegment: settings.restyleLegacyScrollers ? 0 : 1];
+	[self.settingOverlayScrollersToggle setSelectedSegment: settings.restyleOverlayScrollers ? 0 : 1];
+}
+
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
 {
-	NSInteger appearanceTabIndex = [self.tabView indexOfTabViewItemWithIdentifier:@"appearanceTab"];
-	[self.tabView removeTabViewItem: [self.tabView tabViewItemAtIndex:appearanceTabIndex]];
+	//NSInteger appearanceTabIndex = [self.tabView indexOfTabViewItemWithIdentifier:@"appearanceTab"];
+	//[self.tabView removeTabViewItem: [self.tabView tabViewItemAtIndex:appearanceTabIndex]];
+	
+	[self checkForSimbl];
+}
+
+- (BOOL)checkForSimbl {
+	if (simblInstalled()) {
+		[self.simblFoundView setHidden:NO];
+		[self.simblNotFoundView setHidden:YES];
+		[self.pluginSettingsView setHidden:NO];
+		[self updatePluginStatus];
+		self.legacyScrollersPreview.scrollerStyle = NSScrollerStyleLegacy;
+		[self loadPluginSettings];
+		return YES;
+	} else {
+		[self.simblFoundView setHidden:YES];
+		[self.simblNotFoundView setHidden:NO];
+		[self.pluginSettingsView setHidden:YES];
+		return NO;
+	}
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -170,7 +304,7 @@ NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSA
 	NSAlert *alert = [[NSAlert alloc] init];
 	[alert addButtonWithTitle: NSLocalizedString(kAppRestartDialogOkayButton, @"OK")];
 	[alert setIcon: info.icon];
-	[alert addButtonWithTitle: NSLocalizedString(kAppRestartDialogRestartButton, [@"Restart now")];
+	[alert addButtonWithTitle: NSLocalizedString(kAppRestartDialogRestartButton, @"Restart now")];
 	[alert setMessageText:[NSString stringWithFormat: NSLocalizedString(kAppRestartDialogMessageTemplate, @"%@ is running."), info.localizedName]];
 	[alert setInformativeText:NSLocalizedString(kAppRestartDialogInformationText, @"The application needs to be restarted for changes to take effect. Be sure to save your data.")];
 	[alert setAlertStyle:NSWarningAlertStyle];
@@ -270,6 +404,104 @@ NSString *kResetAllSettingsDialogMessageText = @"RESET_ALL_SETTINGS_DIALOG/MESSA
 	return result;
 }
 
+#pragma mark Setup simbl
+
+- (void)checkForSimblRecurring {
+	// Check every 2 seconds until it's installed.
+	if (![self checkForSimbl]) {
+		[self performSelector:@selector(checkForSimblRecurring) withObject:nil afterDelay:2.0];
+	}
+}
+
+- (IBAction)installSimbl:(id)sender
+{
+	NSString* pathToPackage = [[NSBundle mainBundle] pathForResource:@"SIMBL-0.9.9" ofType:@"pkg"];
+	[[NSWorkspace sharedWorkspace] openFile:pathToPackage];
+	[self checkForSimblRecurring];
+}
+
+- (IBAction)readmoreAboutSimbl:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.macupdate.com/app/mac/18351/simbl"]];
+}
+
+- (IBAction)viewSimblLicense:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.gnu.org/licenses/old-licenses/gpl-2.0.html"]];
+}
+
+#pragma mark Plugin config methods
+
+- (IBAction)saveOverlaySettings:(id)sender
+{
+	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();
+	settings.restyleOverlayScrollers = [self.settingOverlayScrollersToggle selectedSegment] == 0 ? YES : NO;
+	settings.scrollerKnobMinAlpha = [self.settingKnobAlpha floatValue];
+	settings.scrollerTrackMinAlpha = [self.settingTrackAlpha floatValue];
+	saveHackedScrollerSettingsToUserDefaults(&settings);
+	// Reload them for the previews.
+	[self pluginSettingsChanged];
+	[self.overylayScrollersPreview flashScrollers];
+}
+
+- (IBAction)saveLegacySettings:(id)sender
+{
+	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();
+	settings.restyleLegacyScrollers = [self.settingLegacyScrollersToggle selectedSegment] == 0 ? YES : NO;
+	settings.roundedCorners = [self.settingRoundedCorners selectedSegment] == 0 ? YES : NO;
+	settings.useGradient = [self.settingUseGradient selectedSegment] == 0 ? YES : NO;
+	settings.drawBackgrounds = [self.settingDrawBackground selectedSegment] == 0 ? YES : NO;
+	saveHackedScrollerSettingsToUserDefaults(&settings);
+	
+	// Reload them for the previews.
+	[self pluginSettingsChanged];
+}
+
+- (IBAction)changePluginStatus:(id)sender
+{
+	bool enabled = [self.pluginStatusToggle selectedSegment] == 0;
+	if (enabled) {
+		BOOL doit = [self confirmPluginEnable];
+		if (doit) {
+			modifyPlugin(YES);
+		} else {
+			[self.pluginStatusToggle setSelectedSegment: 1];
+		}
+	} else {
+		BOOL doit = [self confirmPluginDisable];
+		if (doit) {
+			modifyPlugin(NO);
+		} else {
+			[self.pluginStatusToggle setSelectedSegment: 0];
+		}
+	}
+	[self updatePluginStatus];
+}
+
+- (BOOL)confirmPluginDisable {
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert addButtonWithTitle: NSLocalizedString(kDisablePluginDialogOkayButton, @"Disable")];
+	[alert addButtonWithTitle: NSLocalizedString(kDisablePluginDialogCancelButton, @"Cancel")];
+	[alert setMessageText:NSLocalizedString(kDisablePluginDialogMessageTemplate, @"Disable plugin?")];
+	[alert setInformativeText:NSLocalizedString(kDisablePluginDialogInformationText, @"This will disable the SIMBL-based scroller plugin; the plugin will continue to function in running applications until they are restarted.")];
+	[alert setAlertStyle:NSWarningAlertStyle];
+	BOOL shouldUninstall = [alert runModal] == NSAlertFirstButtonReturn;
+	[alert release];
+	return shouldUninstall;
+}
+
+- (BOOL)confirmPluginEnable {
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert addButtonWithTitle: NSLocalizedString(kEnablePluginDialogOkayButton, @"Install")];
+	[alert addButtonWithTitle: NSLocalizedString(kEnablePluginDialogCancelButton, @"Cancel")];
+	[alert setMessageText:NSLocalizedString(kEnablePluginDialogMessageTemplate, @"Install plugin?")];
+	[alert setInformativeText:NSLocalizedString(kEnablePluginDialogInformationText, @"This will enable the SIMBL-based scroller plugin; running apps will need to be restarted.")];
+	[alert setAlertStyle:NSWarningAlertStyle];
+	BOOL shouldInstall = [alert runModal] == NSAlertFirstButtonReturn;
+	[alert release];
+	return shouldInstall;
+}
+												 
 #pragma mark Search methods
 												 
 - (IBAction)performFilter:(id)sender {

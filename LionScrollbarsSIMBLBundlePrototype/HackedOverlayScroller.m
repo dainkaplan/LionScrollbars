@@ -6,7 +6,7 @@
 //  Copyright 2012 Dain Kaplan <DK@tempura.org>. All rights reserved.
 //
 
-#import "HackedScroller.h"
+#import "HackedOverlayScroller.h"
 #import <objc/objc-class.h>
 
 // To stop compiler warnings about the private API calls

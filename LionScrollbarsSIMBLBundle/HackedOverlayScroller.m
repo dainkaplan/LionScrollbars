@@ -76,4 +76,9 @@ static CGFloat __minTrackAlpha = 0.0;
 	__minTrackAlpha = MAX(0, MIN(1, alpha));
 }
 
+- (void)setHackedScrollerSettings:(HackedScrollerSettings)settings
+{
+	// TODO
+}
+
 @end

@@ -6,7 +6,7 @@
 //  Copyright 2012 Dain's place. All rights reserved.
 //
 
-#import "HackedScroller.h"
+#import "HackedOverlayScroller.h"
 #import "NSScroller+HackedHooks.h"
 #import "NSScrollView+HackedAdditions.h"
 #import "Hacking.h"
@@ -32,13 +32,13 @@
 
 - (void)lsb_setOverlayScrollerKnobAlpha:(CGFloat)alpha 
 {
-	[HackedScroller takeoverInstance:self];
+	[HackedOverlayScroller takeoverInstance:self];
 	[self orig_setOverlayScrollerKnobAlpha: alpha];
 }
 
 - (void)lsb_setOverlayScrollerTrackAlpha:(CGFloat)alpha 
 {
-	[HackedScroller takeoverInstance:self];
+	[HackedOverlayScroller takeoverInstance:self];
 	[self orig_setOverlayScrollerTrackAlpha: alpha];
 }
 

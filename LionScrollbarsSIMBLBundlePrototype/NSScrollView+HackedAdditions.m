@@ -7,8 +7,7 @@
 //
 
 #import "NSScrollView+HackedAdditions.h"
-#import "HackedScroller.h"
-#import "LSBCustomScroller.h"
+#import "HackedOverlayScroller.h"
 #import "Hacking.h"
 
 @interface NSScroller (Private) 
@@ -41,11 +40,11 @@
 
 + (void) lsb_setMinKnobAlpha:(CGFloat)alpha
 {
-	[HackedScroller setMinKnobAlpha: alpha];
+	[HackedOverlayScroller setMinKnobAlpha: alpha];
 }
 + (void) lsb_setMinTrackAlpha:(CGFloat)alpha
 {
-	[HackedScroller setMinTrackAlpha: alpha];	
+	[HackedOverlayScroller setMinTrackAlpha: alpha];	
 }
 
 + (void) initialize
@@ -56,7 +55,7 @@
 
 + (Class) lsb_scrollerClass
 {
-	return [HackedScroller class];
+	return [HackedOverlayScroller class];
 }
 
 + (void) lsb_takeoverScrollers:(NSScrollView *)view

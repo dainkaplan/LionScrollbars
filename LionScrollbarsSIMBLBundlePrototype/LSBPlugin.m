@@ -7,7 +7,7 @@
 //
 
 #import "LSBPlugin.h"
-#import "HackedScroller.h"
+#import "HackedOverlayScroller.h"
 #import "NSScroller+HackedHooks.h"
 #import "DefaultsManager.h"
 

@@ -7,8 +7,9 @@
 //
 
 #import <AppKit/AppKit.h>
+#import "HackedScrollersUserDefaults.h"
 
-@interface HackedLegacyScroller : NSScroller
+@interface HackedLegacyScroller : NSScroller <HackedScrollerUserDefaults>
 
 + (BOOL) overlaysScrollView;
 + (BOOL) roundedCorners;
@@ -17,11 +18,14 @@
 + (BOOL) useGradient;
 + (void) setUseGradient:(BOOL)enable;
 + (void) setDrawBackground:(BOOL)enable;
++ (void) setRoundedCorners:(BOOL)enable;
 
 // Overriding
 
 + (CGFloat) scrollerWidth;
 - (void) drawRect:(NSRect)rect;
 - (void)drawKnob;
+
+- (void)setHackedScrollerSettings:(HackedScrollerSettings)settings;
 
 @end

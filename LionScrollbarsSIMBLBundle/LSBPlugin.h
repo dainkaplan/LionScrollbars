@@ -9,7 +9,8 @@
 // TODO: Think about using NSDistributedNotificationCenter to update settings real-time.
 @interface LSBPlugin : NSObject
 
-- (void) initializeScrollbarHacks;
+- (void) initializeScrollbarHacks:(BOOL)force;
+- (void) redrawScrollers:(BOOL)force;
 - (void) install;
 + (void) load;
 + (LSBPlugin*) sharedInstance;

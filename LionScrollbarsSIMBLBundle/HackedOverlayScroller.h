@@ -7,8 +7,9 @@
 //
 
 #import <AppKit/AppKit.h>
+#import "HackedScrollersUserDefaults.h"
 
-@interface HackedOverlayScroller : NSScroller
+@interface HackedOverlayScroller : NSScroller <HackedScrollerUserDefaults>
 
 + (CGFloat) minKnobAlpha;
 + (CGFloat) minTrackAlpha;
@@ -16,5 +17,7 @@
 + (void) setMinKnobAlpha:(CGFloat)alpha;
 + (void) setMinTrackAlpha:(CGFloat)alpha;
 + (void) takeoverInstance:(NSScroller *)scroller;
+
+- (void)setHackedScrollerSettings:(HackedScrollerSettings)settings;
 
 @end

@@ -37,6 +37,16 @@
 		A56B03EE14D14349002B858C /* LSBPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A56B03E714D14349002B858C /* LSBPlugin.m */; };
 		A56B03EF14D14349002B858C /* NSScroller+HackedHooks.m in Sources */ = {isa = PBXBuildFile; fileRef = A56B03E914D14349002B858C /* NSScroller+HackedHooks.m */; };
 		A56B03F014D14349002B858C /* NSScrollView+HackedAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A56B03EB14D14349002B858C /* NSScrollView+HackedAdditions.m */; };
+		A57BBB3014D3C8E600189114 /* HackedScrollersUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A57BBB2F14D3C8E600189114 /* HackedScrollersUserDefaults.m */; };
+		A57BBB3114D3C8F800189114 /* HackedScrollersUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = A57BBB2F14D3C8E600189114 /* HackedScrollersUserDefaults.m */; };
+		A57BBB3314D4337900189114 /* SIMBL-0.9.9.pkg in Resources */ = {isa = PBXBuildFile; fileRef = A57BBB3214D4337900189114 /* SIMBL-0.9.9.pkg */; };
+		A57BBB3614D4396100189114 /* SIMBL Uninstaller.app in Resources */ = {isa = PBXBuildFile; fileRef = A57BBB3414D4396100189114 /* SIMBL Uninstaller.app */; };
+		A57BBB3714D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt in Resources */ = {isa = PBXBuildFile; fileRef = A57BBB3514D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt */; };
+		A582E0C614D2A20D0033624B /* LionScrollbarsSIMBLBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A526F56F14D13C130075A1F9 /* LionScrollbarsSIMBLBundle.bundle */; };
+		A582E0C914D2ADCD0033624B /* NSObject+DefaultsAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A582E0C814D2ADCD0033624B /* NSObject+DefaultsAdditions.m */; };
+		A582E0CA14D2AE380033624B /* NSObject+DefaultsAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A582E0C814D2ADCD0033624B /* NSObject+DefaultsAdditions.m */; };
+		A582E0CE14D2B0D40033624B /* HackedScrollers+DefaultsAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A582E0CC14D2AE860033624B /* HackedScrollers+DefaultsAdditions.m */; };
+		A582E0D614D302CA0033624B /* DefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A56606A813E64563008C3FE1 /* DefaultsManager.m */; };
 		A59BDBF514C911AC000B6588 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A59BDBF714C911AC000B6588 /* Localizable.strings */; };
 		A5AF349B14D13B6E00F292CD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53EDB3813E458D500274EC2 /* Cocoa.framework */; };
 		A5AF34A114D13B6F00F292CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5AF349F14D13B6F00F292CD /* InfoPlist.strings */; };
@@ -44,6 +54,7 @@
 		A5AF34A714D13B6F00F292CD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A5AF34A514D13B6F00F292CD /* Credits.rtf */; };
 		A5AF34AA14D13B6F00F292CD /* ScrollbarInjectAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5AF34A914D13B6F00F292CD /* ScrollbarInjectAppDelegate.m */; };
 		A5AF34AD14D13B6F00F292CD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5AF34AB14D13B6F00F292CD /* MainMenu.xib */; };
+		A5CC753814D28DF500E35F28 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5CC753714D28DF500E35F28 /* Carbon.framework */; };
 		A5DE3EB413F8161000113727 /* LionScrollbars.png in Resources */ = {isa = PBXBuildFile; fileRef = A5DE3EB313F8161000113727 /* LionScrollbars.png */; };
 		A5E399A813F8E13A001DE87E /* ScrollbarsDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E399A713F8E13A001DE87E /* ScrollbarsDefaultsManager.m */; };
 /* End PBXBuildFile section */
@@ -55,6 +66,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A526F56E14D13C130075A1F9;
 			remoteInfo = LionScrollbarsSIMBLBundleExp;
+		};
+		A582E0C314D2A2050033624B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A53EDB2B13E458D500274EC2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A526F56E14D13C130075A1F9;
+			remoteInfo = LionScrollbarsSIMBLBundle;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -112,6 +130,15 @@
 		A56B03E914D14349002B858C /* NSScroller+HackedHooks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScroller+HackedHooks.m"; sourceTree = "<group>"; };
 		A56B03EA14D14349002B858C /* NSScrollView+HackedAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+HackedAdditions.h"; sourceTree = "<group>"; };
 		A56B03EB14D14349002B858C /* NSScrollView+HackedAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+HackedAdditions.m"; sourceTree = "<group>"; };
+		A57BBB2E14D3C8E600189114 /* HackedScrollersUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HackedScrollersUserDefaults.h; sourceTree = "<group>"; };
+		A57BBB2F14D3C8E600189114 /* HackedScrollersUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HackedScrollersUserDefaults.m; sourceTree = "<group>"; };
+		A57BBB3214D4337900189114 /* SIMBL-0.9.9.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SIMBL-0.9.9.pkg"; path = "SIMBL-0.9.9/SIMBL-0.9.9.pkg"; sourceTree = SOURCE_ROOT; };
+		A57BBB3414D4396100189114 /* SIMBL Uninstaller.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = "SIMBL Uninstaller.app"; path = "SIMBL-0.9.9/SIMBL Uninstaller.app"; sourceTree = SOURCE_ROOT; };
+		A57BBB3514D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "SIMBL-License-GNU_GPL_v2.txt"; path = "SIMBL-0.9.9/SIMBL-License-GNU_GPL_v2.txt"; sourceTree = SOURCE_ROOT; };
+		A582E0C714D2ADCD0033624B /* NSObject+DefaultsAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+DefaultsAdditions.h"; path = "LionScrollbars/NSObject+DefaultsAdditions.h"; sourceTree = SOURCE_ROOT; };
+		A582E0C814D2ADCD0033624B /* NSObject+DefaultsAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+DefaultsAdditions.m"; path = "LionScrollbars/NSObject+DefaultsAdditions.m"; sourceTree = SOURCE_ROOT; };
+		A582E0CB14D2AE860033624B /* HackedScrollers+DefaultsAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HackedScrollers+DefaultsAdditions.h"; sourceTree = "<group>"; };
+		A582E0CC14D2AE860033624B /* HackedScrollers+DefaultsAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HackedScrollers+DefaultsAdditions.m"; sourceTree = "<group>"; };
 		A59BDBF614C911AC000B6588 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A59BDBF814C911B4000B6588 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5AF349914D13B6E00F292CD /* ScrollbarInject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollbarInject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +151,7 @@
 		A5AF34A914D13B6F00F292CD /* ScrollbarInjectAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollbarInjectAppDelegate.m; sourceTree = "<group>"; };
 		A5AF34AC14D13B6F00F292CD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A5CC752614D2817400E35F28 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A5CC753714D28DF500E35F28 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		A5DE3EB313F8161000113727 /* LionScrollbars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LionScrollbars.png; sourceTree = "<group>"; };
 		A5E399A613F8E13A001DE87E /* ScrollbarsDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollbarsDefaultsManager.h; path = ../LionScrollbars/ScrollbarsDefaultsManager.h; sourceTree = "<group>"; };
 		A5E399A713F8E13A001DE87E /* ScrollbarsDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollbarsDefaultsManager.m; path = ../LionScrollbars/ScrollbarsDefaultsManager.m; sourceTree = "<group>"; };
@@ -143,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5CC753814D28DF500E35F28 /* Carbon.framework in Frameworks */,
 				A53EDB5D13E57A5C00274EC2 /* CoreFoundation.framework in Frameworks */,
 				A53EDB3913E458D500274EC2 /* Cocoa.framework in Frameworks */,
 			);
@@ -175,6 +204,10 @@
 				A56B03B514D13C5D002B858C /* HackedLegacyScroller.m */,
 				A56B03B614D13C5D002B858C /* HackedOverlayScroller.h */,
 				A56B03B714D13C5D002B858C /* HackedOverlayScroller.m */,
+				A57BBB2E14D3C8E600189114 /* HackedScrollersUserDefaults.h */,
+				A57BBB2F14D3C8E600189114 /* HackedScrollersUserDefaults.m */,
+				A582E0CB14D2AE860033624B /* HackedScrollers+DefaultsAdditions.h */,
+				A582E0CC14D2AE860033624B /* HackedScrollers+DefaultsAdditions.m */,
 				A56B03B814D13C5D002B858C /* Hacking.h */,
 				A56B03B914D13C5D002B858C /* Hacking.m */,
 				A56B03BA14D13C5D002B858C /* LSBPlugin.h */,
@@ -199,6 +232,7 @@
 		A53EDB2913E458D500274EC2 = {
 			isa = PBXGroup;
 			children = (
+				A5CC753714D28DF500E35F28 /* Carbon.framework */,
 				A53EDB6A13E59CB200274EC2 /* icon.psd */,
 				A5DE3EB313F8161000113727 /* LionScrollbars.png */,
 				A53EDB6813E5997400274EC2 /* LionScrollbars.icns */,
@@ -259,6 +293,8 @@
 				A53EDB5A13E50ACD00274EC2 /* PopUpButtonCellView.m */,
 				A5564D2414C8F3A80007FA0E /* NSRunningApplication+RelaunchAdditions.h */,
 				A5564D2514C8F3A80007FA0E /* NSRunningApplication+RelaunchAdditions.m */,
+				A582E0C714D2ADCD0033624B /* NSObject+DefaultsAdditions.h */,
+				A582E0C814D2ADCD0033624B /* NSObject+DefaultsAdditions.m */,
 			);
 			path = LionScrollbars;
 			sourceTree = "<group>";
@@ -266,6 +302,7 @@
 		A53EDB3F13E458D500274EC2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A57BBB3814D4396600189114 /* SIMBL */,
 				A53EDB4013E458D500274EC2 /* LionScrollbars-Info.plist */,
 				A53EDB4113E458D500274EC2 /* InfoPlist.strings */,
 				A53EDB4413E458D500274EC2 /* main.m */,
@@ -302,6 +339,16 @@
 				A56B03DD14D142E2002B858C /* LionScrollbarsSIMBLBundlePrototype-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A57BBB3814D4396600189114 /* SIMBL */ = {
+			isa = PBXGroup;
+			children = (
+				A57BBB3414D4396100189114 /* SIMBL Uninstaller.app */,
+				A57BBB3514D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt */,
+				A57BBB3214D4337900189114 /* SIMBL-0.9.9.pkg */,
+			);
+			name = SIMBL;
 			sourceTree = "<group>";
 		};
 		A5AF349C14D13B6F00F292CD /* ScrollbarInject */ = {
@@ -359,6 +406,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A582E0C414D2A2050033624B /* PBXTargetDependency */,
 			);
 			name = LionScrollbars;
 			productName = LionScollbars;
@@ -406,7 +454,7 @@
 		A53EDB2B13E458D500274EC2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "Dain's place";
+				ORGANIZATIONNAME = "Dain Kaplan";
 			};
 			buildConfigurationList = A53EDB2E13E458D500274EC2 /* Build configuration list for PBXProject "LionScrollbars" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -442,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A582E0C614D2A20D0033624B /* LionScrollbarsSIMBLBundle.bundle in Resources */,
 				A53EDB4313E458D500274EC2 /* InfoPlist.strings in Resources */,
 				A53EDB4913E458D500274EC2 /* Credits.rtf in Resources */,
 				A53EDB4F13E458D500274EC2 /* MainMenu.xib in Resources */,
@@ -449,6 +498,9 @@
 				A53EDB6B13E59CB200274EC2 /* icon.psd in Resources */,
 				A5DE3EB413F8161000113727 /* LionScrollbars.png in Resources */,
 				A59BDBF514C911AC000B6588 /* Localizable.strings in Resources */,
+				A57BBB3314D4337900189114 /* SIMBL-0.9.9.pkg in Resources */,
+				A57BBB3614D4396100189114 /* SIMBL Uninstaller.app in Resources */,
+				A57BBB3714D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,12 +531,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A582E0CA14D2AE380033624B /* NSObject+DefaultsAdditions.m in Sources */,
 				A56B03C914D13D0F002B858C /* DefaultsManager.m in Sources */,
 				A56B03BE14D13C5D002B858C /* HackedLegacyScroller.m in Sources */,
 				A56B03BF14D13C5D002B858C /* HackedOverlayScroller.m in Sources */,
 				A56B03C014D13C5D002B858C /* Hacking.m in Sources */,
 				A56B03C114D13C5D002B858C /* LSBPlugin.m in Sources */,
 				A56B03C214D13C5D002B858C /* NSScrollerImpHack.m in Sources */,
+				A582E0CE14D2B0D40033624B /* HackedScrollers+DefaultsAdditions.m in Sources */,
+				A57BBB3114D3C8F800189114 /* HackedScrollersUserDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +553,8 @@
 				A56606A913E64563008C3FE1 /* DefaultsManager.m in Sources */,
 				A5E399A813F8E13A001DE87E /* ScrollbarsDefaultsManager.m in Sources */,
 				A5564D2614C8F3A80007FA0E /* NSRunningApplication+RelaunchAdditions.m in Sources */,
+				A582E0C914D2ADCD0033624B /* NSObject+DefaultsAdditions.m in Sources */,
+				A57BBB3014D3C8E600189114 /* HackedScrollersUserDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A582E0D614D302CA0033624B /* DefaultsManager.m in Sources */,
 				A56B03EC14D14349002B858C /* HackedOverlayScroller.m in Sources */,
 				A56B03ED14D14349002B858C /* Hacking.m in Sources */,
 				A56B03EE14D14349002B858C /* LSBPlugin.m in Sources */,
@@ -529,6 +587,11 @@
 			isa = PBXTargetDependency;
 			target = A526F56E14D13C130075A1F9 /* LionScrollbarsSIMBLBundle */;
 			targetProxy = A56B03C614D13CCD002B858C /* PBXContainerItemProxy */;
+		};
+		A582E0C414D2A2050033624B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A526F56E14D13C130075A1F9 /* LionScrollbarsSIMBLBundle */;
+			targetProxy = A582E0C314D2A2050033624B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

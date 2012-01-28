@@ -7,3 +7,8 @@
 "RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON" = "全てをクリア";
 "RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON" = "キャンセル";
 "RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT" = "本当に設定を全部クリアしますか？";
+
+"ENABLE_PLUGIN_DIALOG/OKAY_BUTTON" = "Install";
+"ENABLE_PLUGIN_DIALOG/CANCEL_BUTTON" = "Cancel";
+"ENABLE_PLUGIN_DIALOG/MESSAGE_TEMPLATE" = "Install plugin?";
+"ENABLE_PLUGIN_DIALOG/INFORMATION_TEXT" = "This will enable the SIMBL-based scroller plugin; running apps will need to be restarted.";
