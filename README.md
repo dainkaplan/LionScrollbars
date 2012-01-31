@@ -1,4 +1,4 @@
-# Welcome to LionScrollbars v0.5!
+# Welcome to LionScrollbars v0.5.2!
 
 ## What does it do?
 
@@ -24,6 +24,14 @@ The customized scrollers work via a plugin framework called SIMBL, that allows f
 4. **Customized legacy scrollers take a second to initialize in some apps...**: This is a limitation of the technique used to override the scrollbars. Sorry.
 
 ## Revision History ##
+
+### v0.5.2 ###
+
+* BUG #7: Regression that broke the system default setting popup (fixed).
+
+### v0.5.1 ###
+
+* Switched selectors on "Appearance" tab to use an iOS-style toggle switch intead of SegmentedControl.
 
 ### v0.5 ###
 

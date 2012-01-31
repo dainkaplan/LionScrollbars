@@ -329,21 +329,19 @@ void modifyPlugin(BOOL install) {
 	NSInteger row = [applicationsTableView rowForView:popup];
 	NSString *val = [self settingFromTag:tag];
 	NSLog(@"Row is: %ld", row);
-	if (popup == systemDefaultPopUpButton) {
+	if (row > -1) {
+		AppInfo *info = [filteredApplications objectAtIndex:row];
+		NSLog(@"App Info (new): %@ (%@) = %@", info.name, info.identifier, val);
+		[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:info.identifier];
+		// TODO: Optionally confirm with user to restart app.
+		ConfirmRelaunchBlock block = ^BOOL(NSRunningApplication *app) {
+			NSLog(@"Going to show prompt for: %@ (%@)", app.localizedName, app.bundleIdentifier);
+			return [self confirmAppRelaunch: app];
+		};
+		[NSRunningApplication relaunchAppsWithBundleIdentifier:info.identifier usingConfirmationBlock: block];
+	} else {
 		[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:nil];
 		// TODO: Should flag in the UI someplace app restarts are necessary.
-	} else {
-		if (row > -1) {
-			AppInfo *info = [filteredApplications objectAtIndex:row];
-			NSLog(@"App Info (new): %@ (%@) = %@", info.name, info.identifier, val);
-			[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:info.identifier];
-			// TODO: Optionally confirm with user to restart app.
-			ConfirmRelaunchBlock block = ^BOOL(NSRunningApplication *app) {
-				NSLog(@"Going to show prompt for: %@ (%@)", app.localizedName, app.bundleIdentifier);
-				return [self confirmAppRelaunch: app];
-			};
-			[NSRunningApplication relaunchAppsWithBundleIdentifier:info.identifier usingConfirmationBlock: block];
-		}
 	}
 }
 
@@ -470,7 +468,6 @@ void modifyPlugin(BOOL install) {
 - (IBAction)changePluginStatus:(id)sender
 {
 	bool enabled = [self.pluginStatusToggle state] == NSOnState;
-	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();
 	if (pluginInstalled() == enabled) return;
 	if (enabled) {
 		BOOL doit = [self confirmPluginEnable];
