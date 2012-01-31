@@ -470,6 +470,8 @@ void modifyPlugin(BOOL install) {
 - (IBAction)changePluginStatus:(id)sender
 {
 	bool enabled = [self.pluginStatusToggle state] == NSOnState;
+	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();
+	if (pluginInstalled() == enabled) return;
 	if (enabled) {
 		BOOL doit = [self confirmPluginEnable];
 		if (doit) {
