@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "OnOffSwitchControl.h"
 
 @interface LionScrollbarsAppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource> {
 	NSWindow *window;
@@ -19,33 +20,33 @@
 	NSSearchField *searchField;
 	NSString *tmpSettingValue;
 	NSTabView *tabView;
-	NSSegmentedControl *pluginStatusToggle;
+	OnOffSwitchControl *pluginStatusToggle;
 	NSTextField *pluginStatusLabel;
 	NSTabView *simblNotFoundView;
 	NSTabView *simblFoundView;
 	NSScrollView *overylayScrollersPreview;
 	NSScrollView *legacyScrollersPreview;
 	NSView *pluginSettingsView;
-	NSSegmentedControl *settingOverlayScrollersToggle;
-	NSSegmentedControl *settingLegacyScrollersToggle;
-	NSSegmentedControl *settingUseGradient;
-	NSSegmentedControl *settingDrawBackground;
-	NSSegmentedControl *settingRoundedCorners;
+	OnOffSwitchControl *settingOverlayScrollersToggle;
+	OnOffSwitchControl *settingLegacyScrollersToggle;
 	NSSlider *settingKnobAlpha;
 	NSSlider *settingTrackAlpha;
+	OnOffSwitchControl *settingUseGradient;
+	OnOffSwitchControl *settingDrawBackground;
+	OnOffSwitchControl *settingRoundedCorners;
 }
+@property (assign) IBOutlet OnOffSwitchControl *settingRoundedCorners;
+@property (assign) IBOutlet OnOffSwitchControl *settingDrawBackground;
+@property (assign) IBOutlet OnOffSwitchControl *settingUseGradient;
 @property (assign) IBOutlet NSSlider *settingTrackAlpha;
 @property (assign) IBOutlet NSSlider *settingKnobAlpha;
-@property (assign) IBOutlet NSSegmentedControl *settingRoundedCorners;
-@property (assign) IBOutlet NSSegmentedControl *settingDrawBackground;
-@property (assign) IBOutlet NSSegmentedControl *settingUseGradient;
-@property (assign) IBOutlet NSSegmentedControl *settingLegacyScrollersToggle;
-@property (assign) IBOutlet NSSegmentedControl *settingOverlayScrollersToggle;
+@property (assign) IBOutlet OnOffSwitchControl *settingLegacyScrollersToggle;
+@property (assign) IBOutlet OnOffSwitchControl *settingOverlayScrollersToggle;
 @property (assign) IBOutlet NSView *pluginSettingsView;
 @property (assign) IBOutlet NSScrollView *legacyScrollersPreview;
 @property (assign) IBOutlet NSScrollView *overylayScrollersPreview;
 @property (assign) IBOutlet NSTabView *tabView;
-@property (assign) IBOutlet NSSegmentedControl *pluginStatusToggle;
+@property (assign) IBOutlet OnOffSwitchControl *pluginStatusToggle;
 @property (assign) IBOutlet NSTextField *pluginStatusLabel;
 @property (assign) IBOutlet NSTabView *simblNotFoundView;
 @property (assign) IBOutlet NSTabView *simblFoundView;

@@ -13,6 +13,7 @@
 //#import "HackedScrollers+DefaultsAdditions.h"
 #import "HackedScrollersUserDefaults.h"
 #import "NSObject+DefaultsAdditions.h"
+#import "OnOffSwitchControlCell.h"
 
 const NSInteger const kSettingSystemDefault = -1;
 const NSInteger const kSettingAutomatic = 0;
@@ -114,11 +115,11 @@ void modifyPlugin(BOOL install) {
 
 @implementation LionScrollbarsAppDelegate
 
-@synthesize settingTrackAlpha;
-@synthesize settingKnobAlpha;
 @synthesize settingRoundedCorners;
 @synthesize settingDrawBackground;
 @synthesize settingUseGradient;
+@synthesize settingTrackAlpha;
+@synthesize settingKnobAlpha;
 @synthesize settingLegacyScrollersToggle;
 @synthesize settingOverlayScrollersToggle;
 @synthesize pluginSettingsView;
@@ -138,10 +139,10 @@ void modifyPlugin(BOOL install) {
 {
 	if (pluginInstalled()) {
 		[self.pluginStatusLabel setStringValue:@"Installed"];
-		[self.pluginStatusToggle setSelectedSegment:0];
+		[self.pluginStatusToggle setState:NSOnState];
 	} else {
 		[self.pluginStatusLabel setStringValue:@"Not Installed"];
-		[self.pluginStatusToggle setSelectedSegment:1];
+		[self.pluginStatusToggle setIntValue:NSOffState];
 	}
 }
 
@@ -173,11 +174,11 @@ void modifyPlugin(BOOL install) {
 	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();	
 	[self.settingKnobAlpha setFloatValue: settings.scrollerKnobMinAlpha];
 	[self.settingTrackAlpha setFloatValue: settings.scrollerTrackMinAlpha];
-	[self.settingRoundedCorners setSelectedSegment: settings.roundedCorners ? 0 : 1];
-	[self.settingUseGradient setSelectedSegment: settings.useGradient ? 0 : 1];
-	[self.settingDrawBackground setSelectedSegment: settings.drawBackgrounds ? 0 : 1];
-	[self.settingLegacyScrollersToggle setSelectedSegment: settings.restyleLegacyScrollers ? 0 : 1];
-	[self.settingOverlayScrollersToggle setSelectedSegment: settings.restyleOverlayScrollers ? 0 : 1];
+	[self.settingRoundedCorners setState: settings.roundedCorners ? NSOnState : NSOffState];
+	[self.settingUseGradient setState: settings.useGradient ? NSOnState : NSOffState];
+	[self.settingDrawBackground setState: settings.drawBackgrounds ? NSOnState : NSOffState];
+	[self.settingLegacyScrollersToggle setState: settings.restyleLegacyScrollers ? NSOnState : NSOffState];
+	[self.settingOverlayScrollersToggle setState: settings.restyleOverlayScrollers ? NSOnState : NSOffState];
 }
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification
@@ -188,6 +189,10 @@ void modifyPlugin(BOOL install) {
 	if (![self checkForSimbl]) {
 		[self checkForSimblRecurring];
 	}
+	OnOffSwitchControlCell *switchCell = self.pluginStatusToggle.cell;
+	switchCell.onOffSwitchControlColors = OnOffSwitchControlCustomColors;
+	[switchCell setOnOffSwitchCustomOnColor:[NSColor colorWithCalibratedRed:0.0 green:0.3 blue:1.0 alpha:0.6f]
+								   offColor:[NSColor colorWithCalibratedRed:0.7 green:0.0 blue:0.0 alpha:0.6f]];
 }
 
 - (BOOL)checkForSimbl {
@@ -440,7 +445,7 @@ void modifyPlugin(BOOL install) {
 - (IBAction)saveOverlaySettings:(id)sender
 {
 	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();
-	settings.restyleOverlayScrollers = [self.settingOverlayScrollersToggle selectedSegment] == 0 ? YES : NO;
+	settings.restyleOverlayScrollers = [self.settingOverlayScrollersToggle state] == NSOnState ? YES : NO;
 	settings.scrollerKnobMinAlpha = [self.settingKnobAlpha floatValue];
 	settings.scrollerTrackMinAlpha = [self.settingTrackAlpha floatValue];
 	saveHackedScrollerSettingsToUserDefaults(&settings);
@@ -452,10 +457,10 @@ void modifyPlugin(BOOL install) {
 - (IBAction)saveLegacySettings:(id)sender
 {
 	HackedScrollerSettings settings = loadHackedScrollerSettingsFromUserDefaults();
-	settings.restyleLegacyScrollers = [self.settingLegacyScrollersToggle selectedSegment] == 0 ? YES : NO;
-	settings.roundedCorners = [self.settingRoundedCorners selectedSegment] == 0 ? YES : NO;
-	settings.useGradient = [self.settingUseGradient selectedSegment] == 0 ? YES : NO;
-	settings.drawBackgrounds = [self.settingDrawBackground selectedSegment] == 0 ? YES : NO;
+	settings.restyleLegacyScrollers = [self.settingLegacyScrollersToggle state] == NSOnState ? YES : NO;
+	settings.roundedCorners = [self.settingRoundedCorners state] == NSOnState ? YES : NO;
+	settings.useGradient = [self.settingUseGradient state] == NSOnState ? YES : NO;
+	settings.drawBackgrounds = [self.settingDrawBackground state] == NSOnState ? YES : NO;
 	saveHackedScrollerSettingsToUserDefaults(&settings);
 	
 	// Reload them for the previews.
@@ -464,20 +469,20 @@ void modifyPlugin(BOOL install) {
 
 - (IBAction)changePluginStatus:(id)sender
 {
-	bool enabled = [self.pluginStatusToggle selectedSegment] == 0;
+	bool enabled = [self.pluginStatusToggle state] == NSOnState;
 	if (enabled) {
 		BOOL doit = [self confirmPluginEnable];
 		if (doit) {
 			modifyPlugin(YES);
 		} else {
-			[self.pluginStatusToggle setSelectedSegment: 1];
+			[self.pluginStatusToggle setState: NSOffState];
 		}
 	} else {
 		BOOL doit = [self confirmPluginDisable];
 		if (doit) {
 			modifyPlugin(NO);
 		} else {
-			[self.pluginStatusToggle setSelectedSegment: 0];
+			[self.pluginStatusToggle setState: NSOnState];
 		}
 	}
 	[self updatePluginStatus];

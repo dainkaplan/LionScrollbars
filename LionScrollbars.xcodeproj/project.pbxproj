@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A526F57014D13C130075A1F9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53EDB3813E458D500274EC2 /* Cocoa.framework */; };
 		A526F57614D13C130075A1F9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A526F57414D13C130075A1F9 /* InfoPlist.strings */; };
+		A537BB9214D82761003DFF9E /* OnOffSwitchControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A537BB8F14D82761003DFF9E /* OnOffSwitchControl.m */; };
+		A537BB9314D82761003DFF9E /* OnOffSwitchControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A537BB9114D82761003DFF9E /* OnOffSwitchControlCell.m */; };
 		A53EDB3913E458D500274EC2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A53EDB3813E458D500274EC2 /* Cocoa.framework */; };
 		A53EDB4313E458D500274EC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A53EDB4113E458D500274EC2 /* InfoPlist.strings */; };
 		A53EDB4513E458D500274EC2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A53EDB4413E458D500274EC2 /* main.m */; };
@@ -80,6 +82,10 @@
 		A526F57314D13C130075A1F9 /* LionScrollbarsSIMBLBundle-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LionScrollbarsSIMBLBundle-Info.plist"; sourceTree = "<group>"; };
 		A526F57514D13C130075A1F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A526F57714D13C130075A1F9 /* LionScrollbarsSIMBLBundle-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LionScrollbarsSIMBLBundle-Prefix.pch"; sourceTree = "<group>"; };
+		A537BB8E14D82761003DFF9E /* OnOffSwitchControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnOffSwitchControl.h; sourceTree = "<group>"; };
+		A537BB8F14D82761003DFF9E /* OnOffSwitchControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnOffSwitchControl.m; sourceTree = "<group>"; };
+		A537BB9014D82761003DFF9E /* OnOffSwitchControlCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnOffSwitchControlCell.h; sourceTree = "<group>"; };
+		A537BB9114D82761003DFF9E /* OnOffSwitchControlCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnOffSwitchControlCell.m; sourceTree = "<group>"; };
 		A53EDB3413E458D500274EC2 /* LionScrollbars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LionScrollbars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53EDB3813E458D500274EC2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A53EDB3B13E458D500274EC2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -279,6 +285,10 @@
 		A53EDB3E13E458D500274EC2 /* LionScrollbars */ = {
 			isa = PBXGroup;
 			children = (
+				A537BB8E14D82761003DFF9E /* OnOffSwitchControl.h */,
+				A537BB8F14D82761003DFF9E /* OnOffSwitchControl.m */,
+				A537BB9014D82761003DFF9E /* OnOffSwitchControlCell.h */,
+				A537BB9114D82761003DFF9E /* OnOffSwitchControlCell.m */,
 				A53EDB6713E5995800274EC2 /* LionScrollbars.entitlements */,
 				A53EDB4A13E458D500274EC2 /* LionScrollbarsAppDelegate.h */,
 				A53EDB4B13E458D500274EC2 /* LionScrollbarsAppDelegate.m */,
@@ -553,6 +563,8 @@
 				A5564D2614C8F3A80007FA0E /* NSRunningApplication+RelaunchAdditions.m in Sources */,
 				A582E0C914D2ADCD0033624B /* NSObject+DefaultsAdditions.m in Sources */,
 				A57BBB3014D3C8E600189114 /* HackedScrollersUserDefaults.m in Sources */,
+				A537BB9214D82761003DFF9E /* OnOffSwitchControl.m in Sources */,
+				A537BB9314D82761003DFF9E /* OnOffSwitchControlCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
