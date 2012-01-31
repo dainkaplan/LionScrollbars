@@ -140,7 +140,6 @@
 		A57BBB3214D4337900189114 /* SIMBL-0.9.9.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SIMBL-0.9.9.pkg"; path = "SIMBL-0.9.9/SIMBL-0.9.9.pkg"; sourceTree = SOURCE_ROOT; };
 		A57BBB3414D4396100189114 /* SIMBL Uninstaller.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = "SIMBL Uninstaller.app"; path = "SIMBL-0.9.9/SIMBL Uninstaller.app"; sourceTree = SOURCE_ROOT; };
 		A57BBB3514D4396100189114 /* SIMBL-License-GNU_GPL_v2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "SIMBL-License-GNU_GPL_v2.txt"; path = "SIMBL-0.9.9/SIMBL-License-GNU_GPL_v2.txt"; sourceTree = SOURCE_ROOT; };
-		A57BBB3914D448C300189114 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A582E0C714D2ADCD0033624B /* NSObject+DefaultsAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+DefaultsAdditions.h"; path = "LionScrollbars/NSObject+DefaultsAdditions.h"; sourceTree = SOURCE_ROOT; };
 		A582E0C814D2ADCD0033624B /* NSObject+DefaultsAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+DefaultsAdditions.m"; path = "LionScrollbars/NSObject+DefaultsAdditions.m"; sourceTree = SOURCE_ROOT; };
 		A582E0CB14D2AE860033624B /* HackedScrollers+DefaultsAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HackedScrollers+DefaultsAdditions.h"; sourceTree = "<group>"; };
@@ -635,7 +634,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A53EDB4E13E458D500274EC2 /* en */,
-				A57BBB3914D448C300189114 /* ja */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
