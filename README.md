@@ -28,6 +28,7 @@ The customized scrollers work via a plugin framework called SIMBL, that allows f
 ### v0.5.3 ###
 
 * Backed off behavior to not override non-stock NSScrollers (subsclasses are left alone).
+* Added link to online help wiki.
 
 ### v0.5.2 ###
 

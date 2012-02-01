@@ -438,6 +438,12 @@ void modifyPlugin(BOOL install) {
 	[[NSWorkspace sharedWorkspace] openURL:url];
 }
 
+- (IBAction)showHelp:(id)sender {
+	NSURL *url = [NSURL URLWithString:@"http://bitbucket.org/dainkaplan/lionscrollbars/wiki/"];
+	[[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+
 #pragma mark Plugin config methods
 
 - (IBAction)saveOverlaySettings:(id)sender
