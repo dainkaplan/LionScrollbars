@@ -1,4 +1,4 @@
-# Welcome to LionScrollbars v0.5.2!
+# Welcome to LionScrollbars v0.5.3!
 
 ## What does it do?
 
@@ -24,6 +24,10 @@ The customized scrollers work via a plugin framework called SIMBL, that allows f
 4. **Customized legacy scrollers take a second to initialize in some apps...**: This is a limitation of the technique used to override the scrollbars. Sorry.
 
 ## Revision History ##
+
+### v0.5.3 ###
+
+* Backed off behavior to not override non-stock NSScrollers (subsclasses are left alone).
 
 ### v0.5.2 ###
 

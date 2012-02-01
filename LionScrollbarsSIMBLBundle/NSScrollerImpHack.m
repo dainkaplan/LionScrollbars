@@ -8,6 +8,7 @@
 
 #import "NSScrollerImpHack.h"
 #import "Hacking.h"
+#import "LSBPlugin.h"
 #import "HackedOverlayScroller.h"
 #import "HackedLegacyScroller.h"
 #import <objc/objc-class.h>
@@ -28,6 +29,8 @@
 		return;
 	}
 	__inited = YES;
+	LSBPlugin *plugin = [LSBPlugin sharedInstance];
+	Hacking_ShouldLogStatus(plugin.logLevel > 0);
 	Hacking_SwapClassMethods([self class], objc_getMetaClass("NSScrollerImp"), 
 					 @selector(__scrollerImpClassForStyle:controlSize:), @selector(scrollerImpClassForStyle:controlSize:));
 }
@@ -39,6 +42,8 @@
 		return;
 	}
 	__inited = YES;
+	LSBPlugin *plugin = [LSBPlugin sharedInstance];
+	Hacking_ShouldLogStatus(plugin.logLevel > 0);
 	Hacking_SwapMethods(self, NSClassFromString(@"NSOverlayScrollerImp"), 
 				@selector(_overlay_drawKnobWithAlpha:), @selector(drawKnobWithAlpha:));
 }
@@ -50,6 +55,8 @@
 		return;
 	}
 	__inited = YES;	
+	LSBPlugin *plugin = [LSBPlugin sharedInstance];
+	Hacking_ShouldLogStatus(plugin.logLevel > 0);
 	Hacking_SwapMethods(self, NSClassFromString(@"NSLegacyScrollerImp"), 
 				@selector(_legacy_drawKnobSlotInRect:highlight:alpha:), @selector(drawKnobSlotInRect:highlight:alpha:));
 }
@@ -60,8 +67,11 @@
 	NSScroller *scroller = [self scroller];
 	Class cls = [HackedLegacyScroller class];
 	if (![scroller isMemberOfClass: cls]) {
-		NSLog(@"LSB: scrollbar: %@", [scroller className]);
-		object_setClass(scroller, cls);
+		LSBPlugin *plugin = [LSBPlugin sharedInstance];
+		if (plugin.aggressiveScrollerHacking || [scroller isMemberOfClass:[NSScroller class]]) {
+			if (plugin.logLevel > 0) NSLog(@"LSB: scrollbar: %@", [scroller className]);
+			object_setClass(scroller, cls);
+		}
 	}
 	[self _legacy_drawKnobSlotInRect:arg1 highlight:arg2 alpha:arg3];
 }
@@ -71,10 +81,13 @@
 	NSScroller *scroller = [self scroller];
 	Class cls = [HackedOverlayScroller class];
 	if (![scroller isMemberOfClass: cls]) {
-		NSLog(@"LSB: scrollbar: %@", [scroller className]);
-		object_setClass(scroller, cls);
-		[scroller setOverlayScrollerKnobAlpha:-1];
-		[scroller setOverlayScrollerTrackAlpha:-1];
+		LSBPlugin *plugin = [LSBPlugin sharedInstance];
+		if (plugin.aggressiveScrollerHacking || [scroller isMemberOfClass:[NSScroller class]]) {
+			if (plugin.logLevel > 0) NSLog(@"LSB: scrollbar: %@", [scroller className]);
+			object_setClass(scroller, cls);
+			[scroller setOverlayScrollerKnobAlpha:-1];
+			[scroller setOverlayScrollerTrackAlpha:-1];
+		}
 	}
 	[self _overlay_drawKnobWithAlpha:arg1];
 }
@@ -85,6 +98,9 @@
 // __scrollerImpClassForStyle:controlSize:
 + (Class)__scrollerImpClassForStyle:(long long)arg1 controlSize:(unsigned long long)arg2
 {
+	NSScroller *scroller = [self scroller];
+	LSBPlugin *plugin = [LSBPlugin sharedInstance];
+	if (plugin.logLevel > 2) NSLog(@"LSB: __scrollerImpClassForStyle:controlSize: %@", [scroller className]);
 	return [self __scrollerImpClassForStyle:arg1 controlSize:arg2];
 }
 
@@ -92,6 +108,9 @@
 
 //Hacking_SwapMethods(self, NSClassFromString(@"NSLegacyScrollerImp"), @selector(_legacy_drawKnob), @selector(drawKnob));
 - (void)_legacy_drawKnob{
+	NSScroller *scroller = [self scroller];
+	LSBPlugin *plugin = [LSBPlugin sharedInstance];
+	if (plugin.logLevel > 2) NSLog(@"LSB: _legacy_drawKnob: %@", [scroller className]);
 	[self _legacy_drawKnob];
 }
 
@@ -99,6 +118,9 @@
 // Hacking_SwapMethods(self, NSClassFromString(@"NSLegacyScrollerImp"), @selector(_legacy_drawKnobWithAlpha:), @selector(drawKnobWithAlpha:));
 - (void)_legacy_drawKnobWithAlpha:(double)arg1
 {
+	NSScroller *scroller = [self scroller];
+	LSBPlugin *plugin = [LSBPlugin sharedInstance];
+	if (plugin.logLevel > 2) NSLog(@"LSB: _legacy_drawKnobWithAlpha: %@", [scroller className]);
 	[self _legacy_drawKnobWithAlpha:arg1];
 }
 

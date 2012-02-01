@@ -18,6 +18,10 @@ extern NSString* const kLsbUseGradient;
 extern NSString* const kLsbRoundedCorners;
 extern NSString* const kLsbDrawBackgrounds;
 
+extern NSString* const kLsbLogLevel;
+extern NSString* const kLsbAggressiveScrollerHacking;
+
+
 typedef struct _HackedScrollerSettings {
 	BOOL restyleLegacyScrollers;
 	BOOL restyleOverlayScrollers;
@@ -26,6 +30,8 @@ typedef struct _HackedScrollerSettings {
 	BOOL useGradient;
 	BOOL roundedCorners;
 	BOOL drawBackgrounds;
+	BOOL aggressiveScrollerHacking;
+	NSInteger logLevel;
 } HackedScrollerSettings;
 
 HackedScrollerSettings loadHackedScrollerSettingsFromUserDefaults(void);

@@ -7,12 +7,18 @@
 //
 
 // TODO: Think about using NSDistributedNotificationCenter to update settings real-time.
-@interface LSBPlugin : NSObject
+@interface LSBPlugin : NSObject {
+	NSInteger logLevel;
+	BOOL aggressiveScrollerHacking;
+}
 
 - (void) initializeScrollbarHacks:(BOOL)force;
 - (void) redrawScrollers:(BOOL)force;
 - (void) install;
 + (void) load;
 + (LSBPlugin*) sharedInstance;
+
+@property (readwrite, assign) NSInteger logLevel;
+@property (readwrite, assign) BOOL aggressiveScrollerHacking;
 
 @end

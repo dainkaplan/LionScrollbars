@@ -16,7 +16,6 @@
 + (BOOL) overlaysScrollView;
 + (void) setMinKnobAlpha:(CGFloat)alpha;
 + (void) setMinTrackAlpha:(CGFloat)alpha;
-+ (void) takeoverInstance:(NSScroller *)scroller;
 
 - (void)setHackedScrollerSettings:(HackedScrollerSettings)settings;
 

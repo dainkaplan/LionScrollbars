@@ -16,13 +16,24 @@
 
 @implementation LSBPlugin
 
+@synthesize logLevel;
+@synthesize aggressiveScrollerHacking;
+
 - (id)init
 {
     self = [super init];
     if (self) {
         // Initialization code here.
+		aggressiveScrollerHacking = NO;
+		logLevel = 0;
     }
     
+	NSString *_logLevel = [self userDefaultsValueForSetting: kLsbLogLevel];
+	if (_logLevel != nil) self.logLevel = [_logLevel intValue];
+
+	NSString *_aggressive = [self userDefaultsValueForSetting: kLsbAggressiveScrollerHacking];
+	if (_aggressive != nil) self.aggressiveScrollerHacking = [_aggressive boolValue];
+	
     return self;
 }
 

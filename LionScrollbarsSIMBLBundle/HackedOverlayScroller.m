@@ -30,17 +30,6 @@ static CGFloat __minTrackAlpha = 0.0;
 	return YES;
 }
 
-+ (void) takeoverInstance:(NSScroller *)scroller 
-{
-	Class cls = [HackedOverlayScroller class];
-	if (![scroller isMemberOfClass: cls]) {
-		NSLog(@"scrollbar: %@", [scroller className]);
-		object_setClass(scroller, cls);
-		[scroller setOverlayScrollerKnobAlpha:-1];
-		[scroller setOverlayScrollerTrackAlpha:-1];
-	}
-}
-
 - (void) setOverlayScrollerKnobAlpha:(CGFloat)alpha 
 {
 	const CGFloat min = [HackedOverlayScroller minKnobAlpha];
