@@ -1,8 +1,8 @@
-# Welcome to LionScrollbars v0.5.3!
+# Welcome to LionScrollbars v0.5.4!
 
 ## What does it do?
 
-LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed in OS X Lion (10.7). It also has (experimental) support for customizing the appearance of scrollbars, such as preventing overlays from fading out, or replacing the "legacy" scrollers with something better looking.
+LionScrollbars is a program that enables fine-grained control over how scrollbars are displayed in OS X Lion (10.7). It also has (experimental) support for customizing the appearance of scrollbars, such as preventing overlays from fading out, or replacing the "legacy" scrollers with something better looking (this only works on some apps...).
 
 ## Why do we need it?
 
@@ -14,16 +14,20 @@ Further, if you want to customize the scrollers (prevent the overlay scrollers f
 
 Application preferences are stored in `.plist`  files for each application. These preference files allow for overriding system defaults, so we write to these files for any  application for which you wish to override the system default. Unfortunately in OS X Lion a sandboxing mechanism was introduced, which drastically complicates where and how preferences are handled. 
 
-The customized scrollers work via a plugin framework called SIMBL, that allows for loading code into running programs (such as for the Safari PithHelmet extension up to 5.0). The LionScrollbars SIMBL-plugin, when loaded, overrides the extisting scrollbar rendering methods to make the scrollbars look different.
+The customized scrollers work via a plugin framework called SIMBL, that allows for loading code into running programs (such as for the Safari PithHelmet extension up to 5.0). The LionScrollbars SIMBL-plugin, when loaded, overrides the extisting scrollbar rendering methods to make the scrollbars look different in some apps.
 
 ## Troubleshooting/Q & A
 
 1. **I tried it with App X but it isn't working...**: First, make sure you've __quit and restarted__ the application you want to change scrollbar settings for, as this is necessary for changes to take effect. If it still does not seem to be working, please report an issue (select from top navigation) with the name of the application.
 2. **I want to remove all my per-app settings...**: Just click the "reset all" button on the bottom right of the LionScrollbars application window; this will remove the setting from all applications that have it set.
-3. **I installed the SIMBL plugin to customize legacy scrollers, but not all apps are being customized...**: Most native OS X apps should work, but some (such as Safari and Xcode) don't. Feel free to report any apps that aren't working. Remember, the customization feature is experimental.
+3. **I installed the SIMBL plugin to customize legacy scrollers, but not all apps are being customized...**: Most native OS X apps should work, but some (such as Safari and Xcode) don't. Feel free to report any apps that aren't working. Remember, the customization feature is experimental...
 4. **Customized legacy scrollers take a second to initialize in some apps...**: This is a limitation of the technique used to override the scrollbars. Sorry.
 
 ## Revision History ##
+
+### v0.5.4 ###
+
+* App now broadcasts scrollbar settings changed notification so most (?) apps don't need restart.
 
 ### v0.5.3 ###
 
