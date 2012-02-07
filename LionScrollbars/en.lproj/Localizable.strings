@@ -2,11 +2,11 @@
 "APP_RESTART_DIALOG/OKAY_BUTTON" = "OK";
 "APP_RESTART_DIALOG/MESSAGE_TEMPLATE" = "%@ is running.";
 "APP_RESTART_DIALOG/RESTART_BUTTON" = "Restart Now";
-"APP_RESTART_DIALOG/INFORMATION_TEXT" = "The application needs to be restarted for changes to take effect. Be sure to save your data.";
+"APP_RESTART_DIALOG/INFORMATION_TEXT" = "Some applications need to be restarted for changes to take effect. Be sure to save your data first.";
 
 "RESET_ALL_SETTINGS_DIALOG/RESET_ALL_BUTTON" = "Reset All";
 "RESET_ALL_SETTINGS_DIALOG/CANCEL_BUTTON" = "Cancel";
-"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT" = "Really reset all applications?";
+"RESET_ALL_SETTINGS_DIALOG/MESSAGE_TEXT" = "Really reset scrollbar settings for all applications?";
 
 "ENABLE_PLUGIN_DIALOG/OKAY_BUTTON" = "Install";
 "ENABLE_PLUGIN_DIALOG/CANCEL_BUTTON" = "Cancel";

@@ -15,6 +15,8 @@
 #import "NSObject+DefaultsAdditions.h"
 #import "OnOffSwitchControlCell.h"
 
+NSString * const AppleShowScrollBarsSettingDidChangeNotification = @"AppleShowScrollBarsSettingChanged";
+
 const NSInteger const kSettingSystemDefault = -1;
 const NSInteger const kSettingAutomatic = 0;
 const NSInteger const kSettingWhenScrolling = 1;
@@ -333,6 +335,7 @@ void modifyPlugin(BOOL install) {
 		AppInfo *info = [filteredApplications objectAtIndex:row];
 		NSLog(@"App Info (new): %@ (%@) = %@", info.name, info.identifier, val);
 		[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:info.identifier];
+		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:AppleShowScrollBarsSettingDidChangeNotification object:nil];
 		// TODO: Optionally confirm with user to restart app.
 		ConfirmRelaunchBlock block = ^BOOL(NSRunningApplication *app) {
 			NSLog(@"Going to show prompt for: %@ (%@)", app.localizedName, app.bundleIdentifier);
@@ -342,6 +345,7 @@ void modifyPlugin(BOOL install) {
 	} else {
 		[[ScrollbarsDefaultsManager sharedManager] setSettingValue:val forIdentifier:nil];
 		// TODO: Should flag in the UI someplace app restarts are necessary.
+		[[NSDistributedNotificationCenter defaultCenter] postNotificationName:AppleShowScrollBarsSettingDidChangeNotification object:nil];
 	}
 }
 

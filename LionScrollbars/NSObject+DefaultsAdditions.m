@@ -11,6 +11,16 @@
 
 @implementation NSObject (DefaultsAdditions)
 
+- (NSString *)userDefaultsValueForSetting:(NSString *)name identifier:(NSString *)identifier
+{
+	DefaultsManager *dm = [DefaultsManager sharedManager];
+	NSString *setting = nil;
+	if (setting == nil) {
+		setting = [dm settingValueForKey:name withIdentifier:identifier];
+	}
+	return setting;
+}
+
 - (NSString *)userDefaultsValueForSetting:(NSString *)name
 {
 	DefaultsManager *dm = [DefaultsManager sharedManager];

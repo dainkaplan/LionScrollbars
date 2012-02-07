@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.SystemVersion">11D50</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">1617</string>
@@ -1014,7 +1014,7 @@ IFNJTUJMIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBHTlUgR1BMIHYyLiA</string>
 																	<string key="NSFrame">{{181, 3}, {119, 32}}</string>
 																	<reference key="NSSuperview" ref="771190128"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="960820529"/>
+																	<reference key="NSNextKeyView" ref="324918868"/>
 																	<string key="NSReuseIdentifierKey">_NS:161</string>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSButtonCell" key="NSCell" id="1027981374">
@@ -1629,7 +1629,7 @@ IFNJTUJMIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBHTlUgR1BMIHYyLiA</string>
 												<object class="NSTextFieldCell" key="NSCell" id="881664434">
 													<int key="NSCellFlags">67239424</int>
 													<int key="NSCellFlags2">1077940224</int>
-													<string key="NSContents">LionScrollbars can modify the scrollbar appearance of many native OS X applications with an experimental custom SIMBL plugin.</string>
+													<string key="NSContents">LionScrollbars can modify the scrollbar appearance of some native OS X applications with an experimental SIMBL plugin.</string>
 													<reference key="NSSupport" ref="531123053"/>
 													<string key="NSCellIdentifier">_NS:3936</string>
 													<reference key="NSControlView" ref="744540783"/>
@@ -1658,7 +1658,7 @@ IFNJTUJMIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBHTlUgR1BMIHYyLiA</string>
 																	<string key="NSFrame">{{4, 5}, {465, 34}}</string>
 																	<reference key="NSSuperview" ref="617741964"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView"/>
+																	<reference key="NSNextKeyView" ref="743786742"/>
 																	<string key="NSReuseIdentifierKey">_NS:3936</string>
 																	<bool key="NSEnabled">YES</bool>
 																	<object class="NSTextFieldCell" key="NSCell" id="927895503">
@@ -1699,7 +1699,6 @@ IFNJTUJMIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBHTlUgR1BMIHYyLiA</string>
 												<string key="NSFrame">{{148, -5}, {232, 22}}</string>
 												<reference key="NSSuperview" ref="1027930897"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView"/>
 												<string key="NSReuseIdentifierKey">_NS:3936</string>
 												<bool key="NSEnabled">YES</bool>
 												<object class="NSTextFieldCell" key="NSCell" id="117188388">
@@ -3936,8 +3935,8 @@ IFNJTUJMIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSBHTlUgR1BMIHYyLiA</string>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="LionScrollbars">{512, 512}</string>
 			<string key="NSActionTemplate">{15, 15}</string>
-			<string key="NSMenuCheckmark">{9, 8}</string>
-			<string key="NSMenuMixedState">{7, 2}</string>
+			<string key="NSMenuCheckmark">{11, 11}</string>
+			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="NSSwitch">{15, 15}</string>
 		</dictionary>
 	</data>

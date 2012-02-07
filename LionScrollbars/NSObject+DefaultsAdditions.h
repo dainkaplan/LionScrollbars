@@ -11,5 +11,6 @@
 @interface NSObject (DefaultsAdditions)
 
 - (NSString *)userDefaultsValueForSetting:(NSString *)name;
+- (NSString *)userDefaultsValueForSetting:(NSString *)name identifier:(NSString *)identifier;
 - (void)setUserDefaultsValue:(NSString *)value forSetting:(NSString *)name identifer:(NSString *)identifier;
 @end
